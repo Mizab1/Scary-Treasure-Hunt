@@ -1,0 +1,72 @@
+function on_load minecraft:load{
+    scoreboard objectives add mcb.internal dummy
+    scoreboard objectives add rc_detect minecraft.used:minecraft.carrot_on_a_stick
+    scoreboard objectives add item_select dummy
+
+}
+function on_tick minecraft:tick {
+    execute as @a[scores={rc_detect=1..}] at @s run{
+
+        # Backward and forward button
+        execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":111001}}}] run{
+            execute if score @s item_select matches 1.. run{
+                scoreboard players remove @s item_select 1
+                playsound minecraft:block.stone_button.click_off master @s ~ ~ ~ 1 1
+                function scary_troller:cycle_items/cycle_item_check
+            }
+            execute if score @s item_select matches 0 run{
+                playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2
+            }
+        }
+        execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":111002}}}] run{
+            execute if score @s item_select matches ..<%global["ITEMS_LENGTH"] - 8%> run{
+                scoreboard players add @s item_select 1
+                playsound minecraft:block.stone_button.click_on master @s ~ ~ ~ 1 1
+                function scary_troller:cycle_items/cycle_item_check
+            }
+            execute if score @s item_select matches <%global["ITEMS_LENGTH"] - 8 + 1%> run{
+                playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2
+            }
+        }
+
+        # Reset click
+        scoreboard players reset @s rc_detect
+    }
+} 
+
+#* Forward and Backward stick handler
+<%%
+    let items = [`stick`,`gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`,`iron_ingot`,`iron_block`,`diamond`,`egg`,`diamond`,`gold_block`,`stick`]
+    global["ITEMS_LENGTH"] = items.length
+    global["ITEMS"] = items
+    console.log(global["ITEMS_LENGTH"] - 8) + 1
+%%>
+dir cycle_items{
+    function cycle_item_check{
+        # There are 9 slots for every player, 2 slots are reserved for the left and right arrows, Hence, 9 - 2 = 7 slots are available
+        REPEAT(0, global["ITEMS_LENGTH"] - 7) as i{
+            execute as @a[tag=troller] at @s if score @s item_select matches <%i%> run{
+                <%%
+                    for (let j = 1; j <= 7; j++) {
+                        emit(`item replace entity @s hotbar.${j} with ${global["ITEMS"][(j+i)-1]}`)
+                    }
+                %%>
+            }
+        }
+    }
+    function give_items{
+        item replace entity @s hotbar.0 with carrot_on_a_stick[minecraft:custom_model_data=111001, minecraft:item_name='{"text":"Backward"}'] 1
+        scoreboard players set @s item_select 0
+        function cycle_items:cycle_items/cycle_item_check
+        item replace entity @s hotbar.8 with carrot_on_a_stick[minecraft:custom_model_data=111002, minecraft:item_name='{"text":"Forward"}'] 1
+    }
+}
+# function test {
+#     <%%
+#         global["Item"] = "Hello";
+#         console.log(global)
+#     %%>
+#     <%%
+#         console.log(global)
+#     %%>
+# }

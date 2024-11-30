@@ -4,7 +4,7 @@ data/scary_troller/function/zzz/3.mcfunction:03f226286ad5f96597ab3217f2661dc018d
 data/scary_troller/function/zzz/1.mcfunction:dfab0e156649aa644c5ce3ebf2bc4585c2c7649f
 data/scary_troller/function/zzz/5.mcfunction:1caed4bf42d7d4b9b0f4ff61dcaadd6e1e3ef030
 data/scary_troller/function/zzz/6.mcfunction:03f226286ad5f96597ab3217f2661dc018deaf49
-data/scary_troller/function/zzz/4.mcfunction:c5827bdd435b2497087ebdc9015461823af7aeb1
+data/scary_troller/function/zzz/4.mcfunction:5bafca4202926b31f0bfd9b1b1496f120eb34cd0
 data/scary_troller/function/zzz/0.mcfunction:8b9d32272921813bd4df13fcd0b7316106b77b92
 data/scary_troller/function/on_tick.mcfunction:6bb8444e0eebfc9e288516cfa7fd1a8f90f3536e
 data/scary_troller/function/cycle_items/zzz/0.mcfunction:4554c7065acf3b1432eb8224a7c43670f7c5378e

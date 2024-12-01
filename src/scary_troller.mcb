@@ -1,3 +1,4 @@
+#! Main functions
 function on_load minecraft:load{
     scoreboard objectives add mcb.internal dummy
     scoreboard objectives add rc_detect minecraft.used:minecraft.carrot_on_a_stick
@@ -7,12 +8,17 @@ function on_load minecraft:load{
 function on_tick minecraft:tick {
     execute as @a[scores={rc_detect=1..}] at @s run{
 
+        # Creeper trap setup
+        execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":100001}}}] run{
+            summon marker ~ ~ ~ {Tags:["creeper_trap_marker"]}
+        }
+
         # Backward and forward button
         execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":111001}}}] run{
             execute if score @s item_select matches 1.. run{
                 scoreboard players remove @s item_select 1
                 playsound minecraft:block.stone_button.click_off master @s ~ ~ ~ 1 1
-                function scary_troller:cycle_items/cycle_item_check
+                function *cycle_items/cycle_item_check
             }
             execute if score @s item_select matches 0 run{
                 playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2
@@ -22,7 +28,7 @@ function on_tick minecraft:tick {
             execute if score @s item_select matches ..<%global["ITEMS_LENGTH"] - 8%> run{
                 scoreboard players add @s item_select 1
                 playsound minecraft:block.stone_button.click_on master @s ~ ~ ~ 1 1
-                function scary_troller:cycle_items/cycle_item_check
+                function *cycle_items/cycle_item_check
             }
             execute if score @s item_select matches <%global["ITEMS_LENGTH"] - 8 + 1%> run{
                 playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2
@@ -34,9 +40,31 @@ function on_tick minecraft:tick {
     }
 } 
 
-#* Forward and Backward stick handler
+#! Clocks
+dir clocks {
+    clock clock_10t 10t {
+        # Creeper trap logic
+        execute as @e[type=marker, tag=creeper_trap_marker] at @s run{
+            particle dust{color:[1.000,0.000,0.000],scale:1} ~ ~ ~ .1 .1 .1 1 2 normal
+            execute if entity @a[tag=!troller, distance=..3] run{
+                summon creeper ~ ~ ~ {DeathLootTable:"empty"}
+                REPEAT (1, 4) {
+                    summon vex ~ ~ ~ {DeathLootTable:"empty",HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+                }
+
+                # Kill the marker
+                kill @s
+            }
+        }
+    }
+}
+
+#! Forward and Backward stick handler
 <%%
-    let items = [`stick`,`gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`,`iron_ingot`,`iron_block`,`diamond`,`egg`,`diamond`,`gold_block`,`stick`]
+    let items = [
+        `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Creeper trap summons a creeper"','"when the player is nearby"'],custom_model_data=100001]`,
+        `gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`,`iron_ingot`,`iron_block`,`diamond`,`egg`,`diamond`,`gold_block`,`stick`
+        ]
     global["ITEMS_LENGTH"] = items.length
     global["ITEMS"] = items
     console.log(global["ITEMS_LENGTH"] - 8) + 1
@@ -55,10 +83,10 @@ dir cycle_items{
         }
     }
     function give_items{
-        item replace entity @s hotbar.0 with carrot_on_a_stick[minecraft:custom_model_data=111001, minecraft:item_name='{"text":"Backward"}'] 1
+        item replace entity @s hotbar.0 with carrot_on_a_stick[minecraft:custom_model_data=111001, minecraft:item_name='{"text":"Previous"}'] 1
         scoreboard players set @s item_select 0
-        function cycle_items:cycle_items/cycle_item_check
-        item replace entity @s hotbar.8 with carrot_on_a_stick[minecraft:custom_model_data=111002, minecraft:item_name='{"text":"Forward"}'] 1
+        function ./cycle_item_check
+        item replace entity @s hotbar.8 with carrot_on_a_stick[minecraft:custom_model_data=111002, minecraft:item_name='{"text":"Next"}'] 1
     }
 }
 # function test {

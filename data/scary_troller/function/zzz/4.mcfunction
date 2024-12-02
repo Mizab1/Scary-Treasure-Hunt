@@ -1,3 +1,5 @@
 # Generated with MC-Build
 
-playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2
+scoreboard players remove @s item_select 1
+playsound minecraft:block.stone_button.click_off master @s ~ ~ ~ 1 1
+function scary_troller:cycle_items/cycle_item_check

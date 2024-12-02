@@ -13,6 +13,11 @@ function on_tick minecraft:tick {
             summon marker ~ ~ ~ {Tags:["creeper_trap_marker"]}
         }
 
+        # Guardian trap setup
+        execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":100002}}}] run{
+            summon marker ~ ~ ~ {Tags:["guardian_trap_marker"]}
+        }
+
         # Backward and forward button
         execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":111001}}}] run{
             execute if score @s item_select matches 1.. run{
@@ -56,6 +61,16 @@ dir clocks {
                 kill @s
             }
         }
+
+        # Guardian trap logic
+        execute as @e[type=marker, tag=guardian_trap_marker] at @s run{
+            particle dust{color:[0.000,1.000,0.000],scale:1} ~ ~ ~ .1 .1 .1 1 2 normal
+            execute if entity @a[tag=!troller, distance=..3] run{
+                particle minecraft:elder_guardian ~ ~ ~ 0 0 0 1 1 normal @a[distance=..3]
+                playsound minecraft:entity.elder_guardian.curse master @a ~ ~ ~ 2 0.3
+                kill @s
+            }
+        }
     }
 }
 
@@ -63,7 +78,9 @@ dir clocks {
 <%%
     let items = [
         `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Creeper trap summons a creeper"','"when the player is nearby"'],custom_model_data=100001]`,
-        `gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`,`iron_ingot`,`iron_block`,`diamond`,`egg`,`diamond`,`gold_block`,`stick`
+        `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"'],custom_model_data=100002]`,
+
+        `gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`,`iron_ingot`,`iron_block`,`diamond`,`egg`,`diamond`,`gold_block`
         ]
     global["ITEMS_LENGTH"] = items.length
     global["ITEMS"] = items

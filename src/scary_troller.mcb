@@ -47,6 +47,16 @@ function on_tick minecraft:tick {
 
 #! Clocks
 dir clocks {
+
+    clock clock_20t 20t {
+        # Hole block logic
+        execute as @e[type=armor_stand, tag=hole_block_marker] at @s run{
+            execute if entity @a[tag=!troller, distance=..3] unless entity @e[type=silverfish, tag=hole_block_worm, distance=..3] run{
+                summon silverfish ~ ~1 ~ {Tags:["hole_block_worm"],CustomName:'"Blood Worm"'}
+            }
+        }
+    }
+
     clock clock_10t 10t {
         # Creeper trap logic
         execute as @e[type=marker, tag=creeper_trap_marker] at @s run{
@@ -72,6 +82,15 @@ dir clocks {
             }
         }
     }
+
+    clock clock_5t 5t {
+        # Setup the hole block
+        execute as @e[type=endermite, tag=hole_block_spawner_marker] at @s run{
+            setblock ~ ~ ~ orange_glazed_terracotta
+            summon armor_stand ~ ~ ~ {Invisible:1b,Marker:1b,Tags:["hole_block_marker"]}
+            kill @s
+        }
+    }
 }
 
 #! Forward and Backward stick handler
@@ -79,6 +98,7 @@ dir clocks {
     let items = [
         `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Creeper trap summons a creeper"','"when the player is nearby"'],custom_model_data=100001]`,
         `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"'],custom_model_data=100002]`,
+        `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["hole_block_spawner_marker"]},custom_name='{"italic":false,"text":"Hole Block"}',lore=['"Spawns a worm when a"','"player passes by"'],custom_model_data=100003] `,
 
         `gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`,`iron_ingot`,`iron_block`,`diamond`,`egg`,`diamond`,`gold_block`
         ]

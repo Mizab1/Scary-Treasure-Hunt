@@ -1,4 +1,3 @@
 # Generated with MC-Build
 
-particle dust{color:[1.000,0.000,0.000],scale:1} ~ ~ ~ .1 .1 .1 1 2 normal
-execute if entity @a[tag=!troller, distance=..3] run function scary_troller:clocks/zzz/2
+execute if entity @a[tag=!troller, distance=..3] unless entity @e[type=silverfish, tag=hole_block_worm, distance=..3] run function scary_troller:clocks/zzz/2

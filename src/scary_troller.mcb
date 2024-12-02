@@ -81,6 +81,14 @@ dir clocks {
                 kill @s
             }
         }
+
+        # Landmine trap logic
+        execute as @e[type=armor_stand, tag=landmine] at @s run{
+            execute if entity @a[tag=!troller, distance=..2] run{
+                summon creeper ~ ~ ~ {Fuse:0}
+                kill @s
+            }
+        }
     }
 
     clock clock_5t 5t {
@@ -90,6 +98,12 @@ dir clocks {
             summon armor_stand ~ ~ ~ {Invisible:1b,Marker:1b,Tags:["hole_block_marker"]}
             kill @s
         }
+
+        # Setup the landmine
+        execute as @e[type=endermite, tag=landmine_spawner_marker] at @s run{
+            summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["landmine"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",count:1,components:{"minecraft:custom_model_data":100004}}]}
+            kill @s
+        }
     }
 }
 
@@ -97,10 +111,16 @@ dir clocks {
 <%%
     let items = [
         `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Creeper trap summons a creeper"','"when the player is nearby"'],custom_model_data=100001]`,
+
         `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"'],custom_model_data=100002]`,
+        
         `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["hole_block_spawner_marker"]},custom_name='{"italic":false,"text":"Hole Block"}',lore=['"Spawns a worm when a"','"player passes by"'],custom_model_data=100003] `,
 
-        `gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`,`iron_ingot`,`iron_block`,`diamond`,`egg`,`diamond`,`gold_block`
+        `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["landmine_spawner_marker"]},custom_name='{"italic":false,"text":"Landmine"}',lore=['"Places a landmine which explodes"','"when a player steps on it"'],custom_model_data=100004] `,
+
+
+
+        `gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`
         ]
     global["ITEMS_LENGTH"] = items.length
     global["ITEMS"] = items

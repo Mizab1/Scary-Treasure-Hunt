@@ -5,3 +5,5 @@ execute as @a[tag=troller] at @s if score @s item_select matches 0 run function 
 execute as @a[tag=troller] at @s if score @s item_select matches 1 run function scary_troller:cycle_items/zzz/1
 execute as @a[tag=troller] at @s if score @s item_select matches 2 run function scary_troller:cycle_items/zzz/2
 execute as @a[tag=troller] at @s if score @s item_select matches 3 run function scary_troller:cycle_items/zzz/3
+execute as @a[tag=troller] at @s if score @s item_select matches 4 run function scary_troller:cycle_items/zzz/4
+execute as @a[tag=troller] at @s if score @s item_select matches 5 run function scary_troller:cycle_items/zzz/5

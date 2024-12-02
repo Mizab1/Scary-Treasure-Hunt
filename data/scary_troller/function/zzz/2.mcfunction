@@ -1,3 +1,5 @@
 # Generated with MC-Build
 
-summon marker ~ ~ ~ {Tags:["guardian_trap_marker"]}
+scoreboard players remove @s item_select 1
+playsound minecraft:block.stone_button.click_off master @s ~ ~ ~ 1 1
+function scary_troller:cycle_items/cycle_item_check

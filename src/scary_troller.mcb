@@ -9,14 +9,14 @@ function on_tick minecraft:tick {
     execute as @a[scores={rc_detect=1..}] at @s run{
 
         # Creeper trap setup
-        execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":100001}}}] run{
-            summon marker ~ ~ ~ {Tags:["creeper_trap_marker"]}
-        }
+        # execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":100001}}}] run{
+        #     summon marker ~ ~ ~ {Tags:["creeper_trap_marker"]}
+        # }
 
         # Guardian trap setup
-        execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":100002}}}] run{
-            summon marker ~ ~ ~ {Tags:["guardian_trap_marker"]}
-        }
+        # execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":100002}}}] run{
+        #     summon marker ~ ~ ~ {Tags:["guardian_trap_marker"]}
+        # }
 
         # Backward and forward button
         execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":111001}}}] run{
@@ -92,6 +92,18 @@ dir clocks {
     }
 
     clock clock_5t 5t {
+        # Setup the creeper trap
+        execute as @e[type=endermite, tag=creeper_trap_spawner_marker] at @s run{
+            summon marker ~ ~ ~ {Tags:["creeper_trap_marker"]}
+            kill @s
+        }
+
+        # Setup the guardian trap
+        execute as @e[type=endermite, tag=guardian_trap_spawner_marker] at @s run{
+            summon marker ~ ~ ~ {Tags:["guardian_trap_marker"]}
+            kill @s
+        }
+
         # Setup the hole block
         execute as @e[type=endermite, tag=hole_block_spawner_marker] at @s run{
             setblock ~ ~ ~ orange_glazed_terracotta
@@ -110,9 +122,9 @@ dir clocks {
 #! Forward and Backward stick handler
 <%%
     let items = [
-        `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Creeper trap summons a creeper"','"when the player is nearby"'],custom_model_data=100001]`,
+        `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["creeper_trap_spawner_marker"]},custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"'],custom_model_data=100001] `,
 
-        `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"'],custom_model_data=100002]`,
+        `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["guardian_trap_spawner_marker"]},custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Displays the guardian particle to the nearby player"'],custom_model_data=100002] `,
         
         `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["hole_block_spawner_marker"]},custom_name='{"italic":false,"text":"Hole Block"}',lore=['"Spawns a worm when a"','"player passes by"'],custom_model_data=100003] `,
 
@@ -120,6 +132,8 @@ dir clocks {
 
 
 
+        `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"'],custom_model_data=100002]`,
+        `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"'],custom_model_data=100001]`,
         `gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`
         ]
     global["ITEMS_LENGTH"] = items.length

@@ -1,4 +1,4 @@
 # Generated with MC-Build
 
-execute if score @s item_select matches 1.. run function scary_troller:zzz/2
-execute if score @s item_select matches 0 run function scary_troller:zzz/3
+kill @e[tag=scary_generated, distance=..2]
+fill ~-1 ~-1 ~-1 ~1 ~1 ~1 air replace orange_glazed_terracotta

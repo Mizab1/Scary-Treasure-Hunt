@@ -1,4 +1,4 @@
 # Generated with MC-Build
 
-summon marker ~ ~ ~ {Tags:["creeper_trap_marker"]}
+fill ~3 ~3 ~3 ~-3 ~-3 ~-3 fire replace air
 kill @s

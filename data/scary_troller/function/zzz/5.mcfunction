@@ -1,5 +1,4 @@
 # Generated with MC-Build
 
-scoreboard players add @s item_select 1
-playsound minecraft:block.stone_button.click_on master @s ~ ~ ~ 1 1
-function scary_troller:cycle_items/cycle_item_check
+execute if score @s item_select matches ..7 run function scary_troller:zzz/6
+execute if score @s item_select matches 8 run function scary_troller:zzz/7

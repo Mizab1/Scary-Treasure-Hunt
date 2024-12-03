@@ -7,3 +7,5 @@ execute as @e[type=marker, tag=creeper_trap_marker] at @s run function scary_tro
 execute as @e[type=marker, tag=guardian_trap_marker] at @s run function scary_troller:clocks/zzz/6
 # Landmine trap logic
 execute as @e[type=armor_stand, tag=landmine] at @s run function scary_troller:clocks/zzz/8
+# Fire stone logic 
+execute as @e[type=armor_stand, tag=fire_stone] at @s run function scary_troller:clocks/zzz/10

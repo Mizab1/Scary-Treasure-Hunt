@@ -96,7 +96,7 @@ dir private {
 
             # Fire stone logic 
             execute as @e[type=armor_stand, tag=fire_stone] at @s run{
-                execute unless block ~ ~ ~ stone run{
+                execute unless block ~ ~ ~ light_blue_terracotta run{
                     fill ~3 ~3 ~3 ~-3 ~-3 ~-3 fire replace air
                     kill @s
                 }
@@ -131,7 +131,7 @@ dir private {
 
             # Setup the fire stone
             execute as @e[type=endermite, tag=fire_stone_spawner_marker] at @s run{
-                setblock ~ ~ ~ stone
+                setblock ~ ~ ~ light_blue_terracotta
                 summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["fire_stone", "scary_generated"], Marker:1b}
                 kill @s
             }
@@ -202,5 +202,5 @@ function make_myself_troller{
 #! JSONs
 tag blocks scary_blocks replace {
     orange_glazed_terracotta
-    stone
+    light_blue_terracotta
 }

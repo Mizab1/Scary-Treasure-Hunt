@@ -19,13 +19,13 @@ data/scary_troller/function/private/clocks/zzz/7.mcfunction:1d94957a31227b39956d
 data/scary_troller/function/private/clocks/zzz/10.mcfunction:d888f68191974b789cc6a7fc1759938e958c6a9e
 data/scary_troller/function/private/clocks/zzz/9.mcfunction:51f8be827eb40bd5099a266ed7d81b84c371c7cf
 data/scary_troller/function/private/clocks/zzz/12.mcfunction:bdca4bbfc63ac2234d3f87babac416f4361ff3df
-data/scary_troller/function/private/clocks/zzz/11.mcfunction:2fd6ccc002b5592e738df7db2f7dc17077ff1aa7
+data/scary_troller/function/private/clocks/zzz/11.mcfunction:9b2d9759cbf09078aaa484ec3b86cd2e6c90d9f6
 data/scary_troller/function/private/clocks/clock_10t.mcfunction:57dd24d29de7042bb1d48bda9eb895bc4996367a
 data/scary_troller/function/private/clocks/zzz/14.mcfunction:3c6a9db0007c1083f2c78caceee4034c906bbba4
 data/scary_troller/function/private/clocks/zzz/15.mcfunction:897d9710757e0b7cf399364407cce56259b771f9
 data/scary_troller/function/private/clocks/zzz/16.mcfunction:d79a139d85b347e4a6e13f26b0c97ba99345db02
 data/scary_troller/function/private/clocks/zzz/17.mcfunction:a657f129f73b34591ae8d42d735d3f7a35b8ef1e
-data/scary_troller/function/private/clocks/zzz/18.mcfunction:53e28dcdaec81bb8981afb6249f38668a01c7c12
+data/scary_troller/function/private/clocks/zzz/18.mcfunction:d589d379f3fdf93fc34d6352a348e6f9c74dc61a
 data/scary_troller/function/private/clocks/clock_5t.mcfunction:5752c5b036e2e88769500b1d16c70f4d4855c625
 data/scary_troller/function/private/cycle_items/zzz/0.mcfunction:ead9f8c946ec7f9d851592f4be155f13e73e088d
 data/scary_troller/function/private/cycle_items/zzz/1.mcfunction:7414db2fc0e499f40f66c7cbdbea28893ac00cf2
@@ -39,6 +39,6 @@ data/scary_troller/function/private/cycle_items/zzz/8.mcfunction:1f834a317f5560d
 data/scary_troller/function/private/cycle_items/cycle_item_check.mcfunction:c3d4b060ddc6d3b06e78042ae1ae2d917ee88557
 data/scary_troller/function/private/cycle_items/give_items.mcfunction:2b8b85ab47984ab47f6f33de7c2205fdfe3b4845
 data/scary_troller/function/make_myself_troller.mcfunction:4f7f24f4d1100cbd26197a1f0ed4fd560a692507
-data/scary_troller/tags/block/scary_blocks.json:e78860367794b0316827d8f0ad6ea2e582baff54
+data/scary_troller/tags/block/scary_blocks.json:c8fdab4271be9cb5747691d2178d91ab5c9a6313
 data/minecraft/tags/function/load.json:8c5cced69c4d839a5813d78dca4e64e0e4ffedec
 data/minecraft/tags/function/tick.json:06ed9329835afe595b79783d66cf6675c6ec08e1

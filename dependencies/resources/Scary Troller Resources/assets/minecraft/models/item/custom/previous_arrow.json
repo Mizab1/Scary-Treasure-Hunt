@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "custom/forward_arrow"
+		"layer0": "custom/previous_arrow"
 	}
 }

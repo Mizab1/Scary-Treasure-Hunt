@@ -1,4 +1,4 @@
 # Generated with MC-Build
 
-summon marker ~ ~ ~ {Tags:["guardian_trap_marker", "scary_generated"]}
+summon marker ~ ~ ~ {Tags:["creeper_trap_marker", "scary_generated"]}
 kill @s

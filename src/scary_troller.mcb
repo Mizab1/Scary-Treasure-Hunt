@@ -19,6 +19,14 @@ dir private {
                 fill ~-<%global["diffuser_radius"]/2%> ~-<%global["diffuser_radius"]/2%> ~-<%global["diffuser_radius"]/2%> ~<%global["diffuser_radius"]/2%> ~<%global["diffuser_radius"]/2%> ~<%global["diffuser_radius"]/2%> air replace #scary_troller:scary_blocks
             }
 
+            # Random teleport logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"random_teleport_trap"}}}}, tag=!used_teleport_trap] run{
+                spreadplayers ~ ~ 10 25 false @a[tag=!troller]
+                tag @s add used_teleport_trap
+            } else run {
+                tellraw @s {"text":"Slow down! you are using this trap too frequently...", "color":"red"}
+            }
+
             # Backward and forward button
             execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run{
                 execute if score @s item_select matches 1.. run{
@@ -49,6 +57,9 @@ dir private {
     #! Clocks
     dir clocks {
 
+        clock clock_80t 80t{
+            tag @a[tag=used_teleport_trap] remove used_teleport_trap
+        }
         clock clock_20t 20t {
             # Hole block logic
             execute as @e[type=armor_stand, tag=hole_block_marker] at @s run{
@@ -155,9 +166,11 @@ dir private {
 
             `stick[enchantment_glint_override=true,custom_name='{"italic":false,"text":"Knockback Stick"}',lore=['"Deals humongous amount of knockback"','"to enemies"'],enchantments={levels:{"minecraft:knockback":25},show_in_tooltip:false}]`,
 
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Random Teleport"}',lore=['"Randomly teleport all the enemies."'],custom_data={tool:"random_teleport_trap"},minecraft:item_model=random_teleport_trap]`,
+
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"']]`,
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"']]`,
-            `gold_block`,`diamond`,`redstone`,`egg`,`cake`,`emerald`
+            `gold_block`,`diamond`,`redstone`,`egg`,`cake`
             ]
         global["ITEMS_LENGTH"] = items.length
         global["ITEMS"] = items

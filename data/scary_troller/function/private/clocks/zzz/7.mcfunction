@@ -1,4 +1,9 @@
 # Generated with MC-Build
 
-particle dust{color:[0.000,1.000,0.000],scale:1} ~ ~ ~ .1 .1 .1 1 2 normal
-execute if entity @a[tag=!troller, distance=..3] run function scary_troller:private/clocks/zzz/8
+summon creeper ~ ~ ~ {DeathLootTable:"empty", Tags:["scary_generated"]}
+summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+# Kill the marker
+kill @s

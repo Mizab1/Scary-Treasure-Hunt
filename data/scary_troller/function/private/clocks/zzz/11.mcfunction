@@ -1,3 +1,4 @@
 # Generated with MC-Build
 
-execute unless block ~ ~ ~ light_blue_terracotta run function scary_troller:private/clocks/zzz/12
+summon creeper ~ ~ ~ {Fuse:0, Tags:["scary_generated"]}
+kill @s

@@ -1,5 +1,4 @@
 # Generated with MC-Build
 
-setblock ~ ~ ~ light_blue_terracotta
-summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["fire_stone", "scary_generated"], Marker:1b}
+summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["landmine", "scary_generated"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",count:1,components:{"minecraft:item_model":"landmine_trap"}}]}
 kill @s

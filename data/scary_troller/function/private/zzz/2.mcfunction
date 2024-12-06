@@ -1,4 +1,5 @@
 # Generated with MC-Build
 
-execute if score @s item_select matches 1.. run function scary_troller:private/zzz/3
-execute if score @s item_select matches 0 run function scary_troller:private/zzz/4
+scoreboard players set #ifelse mcb.internal 1
+spreadplayers ~ ~ 10 25 false @a[tag=!troller]
+tag @s add used_teleport_trap

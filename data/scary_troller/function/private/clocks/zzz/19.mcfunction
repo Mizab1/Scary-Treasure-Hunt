@@ -1,5 +1,5 @@
 # Generated with MC-Build
 
-setblock ~ ~ ~ light_blue_terracotta
-summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["fire_stone", "scary_generated"], Marker:1b}
+setblock ~ ~ ~ orange_glazed_terracotta
+summon armor_stand ~ ~ ~ {Invisible:1b,Marker:1b,Tags:["hole_block_marker", "scary_generated"]}
 kill @s

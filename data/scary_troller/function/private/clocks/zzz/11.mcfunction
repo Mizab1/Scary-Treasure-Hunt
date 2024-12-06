@@ -1,4 +1,5 @@
 # Generated with MC-Build
 
-summon creeper ~ ~ ~ {Fuse:0, Tags:["scary_generated"]}
+particle minecraft:elder_guardian ~ ~ ~ 0 0 0 1 1 normal @a[distance=..3]
+playsound minecraft:entity.elder_guardian.curse master @a ~ ~ ~ 2 0.3
 kill @s

@@ -1,3 +1,3 @@
 # Generated with MC-Build
 
-execute unless block ~ ~ ~ light_blue_terracotta run function scary_troller:private/clocks/zzz/13
+execute if entity @a[tag=!troller, distance=..2] run function scary_troller:private/clocks/zzz/13

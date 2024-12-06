@@ -1,5 +1,9 @@
 # Generated with MC-Build
 
-particle minecraft:elder_guardian ~ ~ ~ 0 0 0 1 1 normal @a[distance=..3]
-playsound minecraft:entity.elder_guardian.curse master @a ~ ~ ~ 2 0.3
+summon creeper ~ ~ ~ {DeathLootTable:"empty", Tags:["scary_generated"]}
+summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+# Kill the marker
 kill @s

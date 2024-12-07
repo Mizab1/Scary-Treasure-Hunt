@@ -252,7 +252,7 @@ dir private {
 
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 4"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"supernatural_sound_trap"},minecraft:item_model=supernatural_sound_trap]`,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Player Cage Trap"}',lore=['"Right-click to cage nearby players,"', '"up to ${global["freeze_player_trap_reach"]} blocks."'],custom_data={tool:"freeze_trap"},minecraft:item_model=freeze_trap]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Cage Trap"}',lore=['"Right-click to cage nearby players,"', '"up to ${global["freeze_player_trap_reach"]} blocks."'],custom_data={tool:"freeze_trap"},minecraft:item_model=freeze_trap]`,
 
             `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["herobrine_spawner_marker"]},custom_name='{"italic":false,"text":"Herobrine Trap"}',lore=['"Summons herobrine statue when a player is nearby"','"Rotated as the troller"'],custom_data={tool:"herobrine_trap"},minecraft:item_model=herobrine_trap] `,
 

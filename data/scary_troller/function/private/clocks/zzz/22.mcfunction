@@ -1,5 +1,5 @@
 # Generated with MC-Build
 
-scoreboard players set #ifelse mcb.internal 0
-execute if block ~ ~ ~ water run function scary_troller:private/clocks/zzz/23
-execute if score #ifelse mcb.internal matches 0 run function scary_troller:private/clocks/zzz/24
+setblock ~ ~ ~ light_blue_terracotta
+summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["fire_stone", "scary_generated"], Marker:1b}
+kill @s

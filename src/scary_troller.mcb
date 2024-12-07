@@ -47,6 +47,25 @@ dir private {
                 playsound minecraft:scary.ambient.supernatural master @a ~ ~ ~ 
             }
 
+            # Freeze players trap logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"freeze_trap"}}}}, tag=!used_freeze_trap] run{
+                <%%
+                    global["freeze_player_trap_reach"] = 15
+                    global["freeze_player_trap_duration"] = 4
+                %%>
+                execute as @a[tag=!troller, distance=..<%global["freeze_player_trap_reach"]%>] at @s run{
+                    summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["cage","scary_generated"],ArmorItems:[{},{},{},{id:"minecraft:wooden_hoe",count:1,components:{"minecraft:item_model":"cage"}}]}
+                    effect give @s minecraft:slowness <%global["freeze_player_trap_duration"]%> 100 true
+                    schedule <%global["freeze_player_trap_duration"]%>s replace {
+                        kill @e[type=armor_stand,tag=cage]
+                    }
+
+                }
+                tag @s add used_freeze_trap
+            } else execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"freeze_trap"}}}}, tag=used_freeze_trap] run {
+                tellraw @s {"text":"Slow down! You have just used this trap.", "color":"red"}
+            }
+
             # Backward and forward button
             execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run{
                 execute if score @s item_select matches 1.. run{
@@ -77,6 +96,9 @@ dir private {
     #! Clocks
     dir clocks {
 
+        clock clock_160t 160t{
+            tag @a[tag=used_freeze_trap] remove used_freeze_trap
+        }
         clock clock_80t 80t{
             tag @a[tag=used_teleport_trap] remove used_teleport_trap
         }
@@ -188,6 +210,16 @@ dir private {
                     kill @s
                 }
             }
+
+            # Setup the herobrine trap
+            execute as @e[type=endermite, tag=herobrine_spawner_marker] at @s run{
+                summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["new","herobrine_trap", "scary_generated"], ArmorItems:[{},{},{},{id:"minecraft:wooden_hoe",count:1,components:{"minecraft:item_model":"herobrine_trap"}}]}
+                execute as @e[type=armor_stand, tag=herobrine_trap, tag=new, distance=..3] at @s run{
+                    rotate @s facing entity @p[tag=troller]
+                    tag @s remove new
+                }
+                kill @s
+            }
         }
     }
 
@@ -219,6 +251,10 @@ dir private {
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 3"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"spooky_ambience_sound_trap"},minecraft:item_model=spooky_ambience_sound_trap]`,
 
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 4"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"supernatural_sound_trap"},minecraft:item_model=supernatural_sound_trap]`,
+
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Player Cage Trap"}',lore=['"Right-click to cage nearby players,"', '"up to ${global["freeze_player_trap_reach"]} blocks."'],custom_data={tool:"freeze_trap"},minecraft:item_model=freeze_trap]`,
+
+            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["herobrine_spawner_marker"]},custom_name='{"italic":false,"text":"Herobrine Trap"}',lore=['"Summons herobrine statue when a player is nearby"','"Rotated as the troller"'],custom_data={tool:"herobrine_trap"},minecraft:item_model=herobrine_trap] `,
 
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"']]`,
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"']]`,

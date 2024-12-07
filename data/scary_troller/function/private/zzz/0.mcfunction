@@ -14,8 +14,12 @@ execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1
 execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"spooky_ambience_sound_trap"}}}}] run function scary_troller:private/zzz/6
 # Scary Sound 4 logic
 execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"supernatural_sound_trap"}}}}] run function scary_troller:private/zzz/7
+# Freeze players trap logic
+scoreboard players set #ifelse mcb.internal 0
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"freeze_trap"}}}}, tag=!used_freeze_trap] run function scary_troller:private/zzz/8
+execute if score #ifelse mcb.internal matches 0 if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"freeze_trap"}}}}, tag=used_freeze_trap] run function scary_troller:private/zzz/12
 # Backward and forward button
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run function scary_troller:private/zzz/8
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"next_arrow"}}}}] run function scary_troller:private/zzz/11
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run function scary_troller:private/zzz/13
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"next_arrow"}}}}] run function scary_troller:private/zzz/16
 # Reset click
 scoreboard players reset @s rc_detect

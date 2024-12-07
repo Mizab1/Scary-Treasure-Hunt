@@ -1,4 +1,3 @@
 # Generated with MC-Build
 
-fill ~3 ~3 ~3 ~-3 ~-3 ~-3 fire replace air
-kill @s
+execute unless block ~ ~ ~ light_blue_terracotta run function scary_troller:private/clocks/zzz/16

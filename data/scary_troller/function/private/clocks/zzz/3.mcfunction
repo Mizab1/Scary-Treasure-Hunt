@@ -1,3 +1,4 @@
 # Generated with MC-Build
 
-summon silverfish ~ ~1 ~ {Tags:["hole_block_worm", "scary_generated"],CustomName:'"Blood Worm"'}
+execute if entity @a[tag=!troller, distance=..3] unless entity @e[type=silverfish, tag=hole_block_worm, distance=..3] run function scary_troller:private/clocks/zzz/4
+execute unless block ~ ~ ~ orange_glazed_terracotta run function scary_troller:private/clocks/zzz/5

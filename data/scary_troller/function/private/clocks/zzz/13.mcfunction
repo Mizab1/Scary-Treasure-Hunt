@@ -1,4 +1,3 @@
 # Generated with MC-Build
 
-summon creeper ~ ~ ~ {Fuse:0, Tags:["scary_generated"]}
-kill @s
+execute if entity @a[tag=!troller, distance=..2] run function scary_troller:private/clocks/zzz/14

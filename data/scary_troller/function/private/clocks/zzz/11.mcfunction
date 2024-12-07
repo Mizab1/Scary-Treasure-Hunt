@@ -1,5 +1,4 @@
 # Generated with MC-Build
 
-particle minecraft:elder_guardian ~ ~ ~ 0 0 0 1 1 normal @a[distance=..3]
-playsound minecraft:entity.elder_guardian.curse master @a ~ ~ ~ 2 0.3
-kill @s
+particle dust{color:[0.000,1.000,0.000],scale:1} ~ ~ ~ .1 .1 .1 1 2 normal
+execute if entity @a[tag=!troller, distance=..3] run function scary_troller:private/clocks/zzz/12

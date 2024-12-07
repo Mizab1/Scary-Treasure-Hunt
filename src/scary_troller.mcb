@@ -27,6 +27,26 @@ dir private {
                 tellraw @s {"text":"Slow down! you are using this trap too frequently...", "color":"red"}
             }
 
+            # Scary Sound 1 logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"lidcreak_sound_trap"}}}}] run{
+                playsound minecraft:scary.ambient.lidcreak master @a ~ ~ ~ 
+            }
+
+            # Scary Sound 2 logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"dark_slam_sound_trap"}}}}] run{
+                playsound minecraft:scary.ambient.dark_slam master @a ~ ~ ~ 
+            }
+
+            # Scary Sound 3 logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"spooky_ambience_sound_trap"}}}}] run{
+                playsound minecraft:scary.ambient.spooky_ambience master @a ~ ~ ~ 
+            }
+
+            # Scary Sound 4 logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"supernatural_sound_trap"}}}}] run{
+                playsound minecraft:scary.ambient.supernatural master @a ~ ~ ~ 
+            }
+
             # Backward and forward button
             execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run{
                 execute if score @s item_select matches 1.. run{
@@ -191,6 +211,14 @@ dir private {
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Random Teleport"}',lore=['"Randomly teleport all the enemies."'],custom_data={tool:"random_teleport_trap"},minecraft:item_model=random_teleport_trap]`,
 
             `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["water_spawner_marker"]},custom_name='{"italic":false,"text":"Water Trap"}',lore=['"Summons fangs in water when a player is nearby"','"Can only be placed in water"'],custom_data={tool:"water_trap"},minecraft:item_model=water_trap] `,
+
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 1"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"lidcreak_sound_trap"},minecraft:item_model=lidcreak_sound_trap]`,
+
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 2"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"dark_slam_sound_trap"},minecraft:item_model=dark_slam_sound_trap]`,
+
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 3"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"spooky_ambience_sound_trap"},minecraft:item_model=spooky_ambience_sound_trap]`,
+
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 4"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"supernatural_sound_trap"},minecraft:item_model=supernatural_sound_trap]`,
 
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"']]`,
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"']]`,

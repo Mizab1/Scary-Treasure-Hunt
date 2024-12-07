@@ -1,3 +1,3 @@
 # Generated with MC-Build
 
-playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2
+playsound minecraft:scary.ambient.spooky_ambience master @a ~ ~ ~

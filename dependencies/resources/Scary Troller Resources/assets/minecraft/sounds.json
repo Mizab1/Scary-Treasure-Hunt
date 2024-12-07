@@ -1,0 +1,14 @@
+{
+	"scary.ambient.dark_slam": {
+		"sounds": [{ "name": "ambient/dark_slam" }]
+	},
+	"scary.ambient.lidcreak": {
+		"sounds": [{ "name": "ambient/lidcreak" }]
+	},
+	"scary.ambient.spooky_ambience": {
+		"sounds": [{ "name": "ambient/spooky_ambience" }]
+	},
+	"scary.ambient.supernatural": {
+		"sounds": [{ "name": "ambient/supernatural" }]
+	}
+}

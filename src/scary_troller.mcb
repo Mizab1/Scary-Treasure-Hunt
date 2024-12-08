@@ -1,3 +1,5 @@
+import ./templates/raycast.mcbt
+
 dir private {
     
     #! Main functions
@@ -295,7 +297,7 @@ dir private {
     # }
 }
 
-function make_myself_troller{
+function make_me_troller{
     tag @s add troller
     function *private/cycle_items/give_items
 }

@@ -1,0 +1,18 @@
+template raycast {
+    with entity exec_entity:word block_to_ignore:word target_entity:word success:block {
+        execute as <%exec_entity%> at @s anchored eyes if block ~ ~ ~ <%block_to_ignore%> run{
+            execute if block ~ ~ ~ <%block_to_ignore%> unless entity <%target_entity%> positioned ^ ^ ^1 run function ^0
+            <%%
+                emit(`execute if entity ${target_entity} run ${embed(success)}`)
+            %%>
+        }
+    }
+    with block exec_entity:word block_to_ignore:word target_block:word success:block {
+        execute as <%exec_entity%> at @s anchored eyes if block ~ ~ ~ <%block_to_ignore%> run{
+            execute if block ~ ~ ~ <%block_to_ignore%> unless block ~ ~ ~ <%target_block%> positioned ^ ^ ^1 run function ^0
+            <%%
+                emit(`execute if block ~ ~ ~ ${target_block} run ${embed(success)}`)
+            %%>
+        }
+    }
+}

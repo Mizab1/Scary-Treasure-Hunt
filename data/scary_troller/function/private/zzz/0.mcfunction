@@ -27,8 +27,11 @@ execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1
 execute as @e[type=snowball,tag=custom_snowball,tag=!processed] at @s rotated as @p run function scary_troller:private/zzz/22
 # Laser gun logic
 execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"laser_gun"}}}}] run function scary_troller:private/zzz/23
+# Grenade launcher logic
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"grenade_launcher"}}}}] run function scary_troller:private/zzz/27
+execute as @e[type=tnt,tag=custom_grenade,tag=!processed] at @s rotated as @p run function scary_troller:private/zzz/28
 # Backward and forward button
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run function scary_troller:private/zzz/27
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"next_arrow"}}}}] run function scary_troller:private/zzz/30
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run function scary_troller:private/zzz/29
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"next_arrow"}}}}] run function scary_troller:private/zzz/32
 # Reset click
 scoreboard players reset @s rc_detect

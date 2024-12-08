@@ -1,4 +1,4 @@
 # Generated with MC-Build
 
-execute if score @s item_select matches 1.. run function scary_troller:private/zzz/28
-execute if score @s item_select matches 0 run function scary_troller:private/zzz/29
+playsound minecraft:entity.dragon_fireball.explode master @a ~ ~ ~ 0.5 1.5
+summon tnt ^ ^1.5 ^ {Tags:["custom_grenade"],fuse:60}

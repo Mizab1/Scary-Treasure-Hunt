@@ -1,4 +1,3 @@
 # Generated with MC-Build
 
-execute if score @s item_select matches 1.. run function scary_troller:private/zzz/18
-execute if score @s item_select matches 0 run function scary_troller:private/zzz/19
+execute as @s at @s anchored eyes positioned ^ ^ ^1 if block ~ ~ ~ #minecraft:air run function scary_troller:private/zzz/18

@@ -1,3 +1,3 @@
 # Generated with MC-Build
 
-playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2
+effect give @a[distance=..2,tag=!troller] darkness 4 1 true

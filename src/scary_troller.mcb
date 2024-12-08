@@ -70,8 +70,15 @@ dir private {
 
             # Levitation wand logic
             execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"levitation_wand"}}}}] run{
-                raycast levitation @s #minecraft:air @e[type=cow,distance=..2,tag=!troller] {
-                    effect give @e[type=cow,distance=..2,tag=!troller] levitation 1 20 true
+                raycast levitation @s #minecraft:air @a[distance=..2,tag=!troller] {
+                    effect give @a[distance=..2,tag=!troller] levitation 1 20 true
+                }
+            }
+
+            # Blindness wand logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"blindness_wand"}}}}] run{
+                raycast blindness @s #minecraft:air @a[distance=..2,tag=!troller] {
+                    effect give @a[distance=..2,tag=!troller] darkness 4 1 true
                 }
             }
 
@@ -267,9 +274,7 @@ dir private {
 
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Levitation Wand"}',lore=['"Right-click to levitate the player you are aiming at"'],custom_data={tool:"levitation_wand"},minecraft:item_model=levitation_wand]`,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"']]`,
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"']]`,
-            `gold_block`,`diamond`,`redstone`,`egg`,`cake`
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Blindness Wand"}',lore=['"Right-click to blind the player you are aiming at"'],custom_data={tool:"blindness_wand"},minecraft:item_model=blindness_wand]`,
             ]
         global["ITEMS_LENGTH"] = items.length
         global["ITEMS"] = items

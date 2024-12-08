@@ -22,8 +22,11 @@ execute if score #ifelse mcb.internal matches 0 if entity @s[nbt={SelectedItem:{
 execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"levitation_wand"}}}}] run function scary_troller:private/zzz/13
 # Blindness wand logic
 execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"blindness_wand"}}}}] run function scary_troller:private/zzz/17
+# Snowball gun logic
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"snowball_gun"}}}}] run function scary_troller:private/zzz/21
+execute as @e[type=snowball,tag=custom_snowball,tag=!processed] at @s rotated as @p run function scary_troller:private/zzz/22
 # Backward and forward button
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run function scary_troller:private/zzz/21
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"next_arrow"}}}}] run function scary_troller:private/zzz/24
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run function scary_troller:private/zzz/23
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"next_arrow"}}}}] run function scary_troller:private/zzz/26
 # Reset click
 scoreboard players reset @s rc_detect

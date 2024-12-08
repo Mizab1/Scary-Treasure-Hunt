@@ -8,6 +8,14 @@ dir private {
         scoreboard objectives add rc_detect minecraft.used:minecraft.carrot_on_a_stick
         scoreboard objectives add item_select dummy
 
+        scoreboard objectives add pos_x1 dummy
+        scoreboard objectives add pos_y1 dummy
+        scoreboard objectives add pos_z1 dummy
+
+        scoreboard objectives add pos_x2 dummy
+        scoreboard objectives add pos_y2 dummy
+        scoreboard objectives add pos_z2 dummy
+
     }
     function on_tick minecraft:tick {
         execute as @a[scores={rc_detect=1..}] at @s run{
@@ -80,6 +88,32 @@ dir private {
                 raycast blindness @s #minecraft:air @a[distance=..2,tag=!troller] {
                     effect give @a[distance=..2,tag=!troller] darkness 4 1 true
                 }
+            }
+
+            # Snowball gun logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"snowball_gun"}}}}] run{
+                summon snowball ^ ^1.5 ^ {Tags:["custom_snowball"]}
+            }
+            execute as @e[type=snowball,tag=custom_snowball,tag=!processed] at @s rotated as @p run{
+                execute store result score @s pos_x1 run data get entity @s Pos[0] 1000
+                execute store result score @s pos_y1 run data get entity @s Pos[1] 1000
+                execute store result score @s pos_z1 run data get entity @s Pos[2] 1000
+
+                tp @s ^ ^ ^0.1
+
+                execute store result score @s pos_x2 run data get entity @s Pos[0] 1000
+                execute store result score @s pos_y2 run data get entity @s Pos[1] 1000
+                execute store result score @s pos_z2 run data get entity @s Pos[2] 1000
+
+                scoreboard players operation @s pos_x2 -= @s pos_x1
+                scoreboard players operation @s pos_y2 -= @s pos_y1
+                scoreboard players operation @s pos_z2 -= @s pos_z1 
+
+                execute store result entity @s Motion[0] double 0.03 run scoreboard players get @s pos_x2
+                execute store result entity @s Motion[1] double 0.03 run scoreboard players get @s pos_y2
+                execute store result entity @s Motion[2] double 0.03 run scoreboard players get @s pos_z2 
+
+                tag @s add processed
             }
 
             # Backward and forward button
@@ -314,6 +348,9 @@ dir private {
 function make_me_troller{
     tag @s add troller
     function *private/cycle_items/give_items
+}
+function give_non_troll_weapons{
+    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Snowball Gun"}',lore=['"Right-click to shoot snowball"'],custom_data={tool:"snowball_gun"},item_model="snowball_gun"] 1
 }
 
 #! JSONs

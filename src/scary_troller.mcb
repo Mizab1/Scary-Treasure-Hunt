@@ -68,6 +68,13 @@ dir private {
                 tellraw @s {"text":"Slow down! You have just used this trap.", "color":"red"}
             }
 
+            # Levitation wand logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"levitation_wand"}}}}] run{
+                raycast levitation @s #minecraft:air @e[type=cow,distance=..2,tag=!troller] {
+                    effect give @e[type=cow,distance=..2,tag=!troller] levitation 1 20 true
+                }
+            }
+
             # Backward and forward button
             execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run{
                 execute if score @s item_select matches 1.. run{
@@ -257,6 +264,8 @@ dir private {
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Cage Trap"}',lore=['"Right-click to cage nearby players,"', '"up to ${global["freeze_player_trap_reach"]} blocks."'],custom_data={tool:"freeze_trap"},minecraft:item_model=freeze_trap]`,
 
             `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["herobrine_spawner_marker"]},custom_name='{"italic":false,"text":"Herobrine Trap"}',lore=['"Summons herobrine statue when a player is nearby"','"Rotated as the troller"'],custom_data={tool:"herobrine_trap"},minecraft:item_model=herobrine_trap] `,
+
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Levitation Wand"}',lore=['"Right-click to levitate the player you are aiming at"'],custom_data={tool:"levitation_wand"},minecraft:item_model=levitation_wand]`,
 
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Show guardian jumpscare to nearby player"']]`,
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"']]`,

@@ -9,9 +9,26 @@ template raycast {
     }
     with block exec_entity:word block_to_ignore:word target_block:word success:block {
         execute as <%exec_entity%> at @s anchored eyes if block ~ ~ ~ <%block_to_ignore%> run{
+            <%%
+                emit(embed(effects))
+            %%>
             execute if block ~ ~ ~ <%block_to_ignore%> unless block ~ ~ ~ <%target_block%> positioned ^ ^ ^1 run function ^0
             <%%
                 emit(`execute if block ~ ~ ~ ${target_block} run ${embed(success)}`)
+            %%>
+        }
+    }
+
+    with levitation exec_entity:word block_to_ignore:word target_entity:word success:block{
+        execute as <%exec_entity%> at @s anchored eyes positioned ^ ^ ^1 if block ~ ~ ~ <%block_to_ignore%> run{
+            execute if block ~ ~ ~ <%block_to_ignore%> positioned ^ ^ ^1 run function ^0
+
+            particle dust{color:[1.000,0.976,0.965],scale:1} ^-0.8 ^-0.6 ^1.2 0.2 0.2 0.2 1 20 normal
+            playsound minecraft:entity.shulker.shoot ambient @a ~ ~ ~ 1 0.5
+
+            <%%
+                emit(`execute unless block ~ ~ ~ ${block_to_ignore} run ${embed(success)}`)
+                emit(`execute if entity ${target_entity} run ${embed(success)}`)
             %%>
         }
     }

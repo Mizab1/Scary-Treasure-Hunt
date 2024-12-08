@@ -1,3 +1,3 @@
 # Generated with MC-Build
 
-playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2
+effect give @e[type=cow,distance=..2,tag=!troller] levitation 1 20 true

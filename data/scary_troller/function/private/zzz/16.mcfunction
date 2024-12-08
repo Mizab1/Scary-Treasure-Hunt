@@ -1,4 +1,3 @@
 # Generated with MC-Build
 
-execute if score @s item_select matches ..14 run function scary_troller:private/zzz/17
-execute if score @s item_select matches 15 run function scary_troller:private/zzz/18
+effect give @e[type=cow,distance=..2,tag=!troller] levitation 1 20 true

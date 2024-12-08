@@ -17,3 +17,4 @@ execute as @a[tag=troller] at @s if score @s item_select matches 12 run function
 execute as @a[tag=troller] at @s if score @s item_select matches 13 run function scary_troller:private/cycle_items/zzz/13
 execute as @a[tag=troller] at @s if score @s item_select matches 14 run function scary_troller:private/cycle_items/zzz/14
 execute as @a[tag=troller] at @s if score @s item_select matches 15 run function scary_troller:private/cycle_items/zzz/15
+execute as @a[tag=troller] at @s if score @s item_select matches 16 run function scary_troller:private/cycle_items/zzz/16

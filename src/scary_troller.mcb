@@ -115,6 +115,13 @@ dir private {
 
                 tag @s add processed
             }
+            
+            # Laser gun logic
+            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"laser_gun"}}}}] run{
+                raycast laser @s #minecraft:air @a[dx=0,tag=!troller] {
+                    damage @a[dx=0,tag=!troller,limit=1] 1 minecraft:player_attack
+                }
+            }
 
             # Backward and forward button
             execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run{
@@ -350,6 +357,7 @@ function make_me_troller{
     function *private/cycle_items/give_items
 }
 function give_non_troll_weapons{
+    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Laser Gun"}',lore=['"Right-click to shoot laser ray"'],custom_data={tool:"laser_gun"},item_model="laser_gun"] 1
     give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Snowball Gun"}',lore=['"Right-click to shoot snowball"'],custom_data={tool:"snowball_gun"},item_model="snowball_gun"] 1
 }
 

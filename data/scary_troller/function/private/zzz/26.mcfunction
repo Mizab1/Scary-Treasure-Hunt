@@ -1,4 +1,3 @@
 # Generated with MC-Build
 
-execute if score @s item_select matches ..9 run function scary_troller:private/zzz/27
-execute if score @s item_select matches 10 run function scary_troller:private/zzz/28
+damage @a[dx=0,tag=!troller,limit=1] 1 minecraft:player_attack

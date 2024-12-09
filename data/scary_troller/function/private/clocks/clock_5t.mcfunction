@@ -15,3 +15,5 @@ execute as @e[type=endermite, tag=fire_stone_spawner_marker] at @s run function 
 execute as @e[type=endermite, tag=water_spawner_marker] at @s run function scary_troller:private/clocks/zzz/23
 # Setup the herobrine trap
 execute as @e[type=endermite, tag=herobrine_spawner_marker] at @s run function scary_troller:private/clocks/zzz/26
+# Count the number of key for each player and display corresponding number of custom key font to them
+execute as @a run function scary_troller:private/clocks/zzz/28

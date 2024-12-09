@@ -1,4 +1,4 @@
-data/scary_troller/function/private/on_load.mcfunction:753920e66c7293a4a5c5c5883df86a6987759efc
+data/scary_troller/function/private/on_load.mcfunction:8456e84101781e765440165fccd9f4f3df50a317
 data/scary_troller/function/private/zzz/1.mcfunction:bea322eda9bec6214d352e0edeeb99d0c2acd1de
 data/scary_troller/function/private/zzz/2.mcfunction:6c257588c8530266a5058a8aef5ccf8c818b721d
 data/scary_troller/function/private/zzz/3.mcfunction:4820ee9887449092a904050d1331c0ffb3a02404
@@ -61,7 +61,8 @@ data/scary_troller/function/private/clocks/zzz/25.mcfunction:7f046fe61a687eb09cb
 data/scary_troller/function/private/clocks/zzz/23.mcfunction:82f3d323798d30085ecf0f0935ec28eb4c1a1ac9
 data/scary_troller/function/private/clocks/zzz/27.mcfunction:68f1594c55bdb841058119d1711598d54a66cfa7
 data/scary_troller/function/private/clocks/zzz/26.mcfunction:5dd46adecb6c32bb2a3661425c5b35c6a5d0f29a
-data/scary_troller/function/private/clocks/clock_5t.mcfunction:246a8b67764e2feef9679c6dcc976b37de1b2615
+data/scary_troller/function/private/clocks/zzz/28.mcfunction:2668014487dc82905f41f9a9b29324f67ea82e4d
+data/scary_troller/function/private/clocks/clock_5t.mcfunction:56011d6e311aa77cb0ae8d4713901a408454a879
 data/scary_troller/function/private/cycle_items/zzz/0.mcfunction:ead9f8c946ec7f9d851592f4be155f13e73e088d
 data/scary_troller/function/private/cycle_items/zzz/1.mcfunction:86183897919497558e133aae1eb0a7d78d3dc0db
 data/scary_troller/function/private/cycle_items/zzz/2.mcfunction:26953fa29510bcba300c94d8a10dba61949f27af
@@ -77,6 +78,7 @@ data/scary_troller/function/private/cycle_items/cycle_item_check.mcfunction:4fc4
 data/scary_troller/function/private/cycle_items/give_items.mcfunction:2b8b85ab47984ab47f6f33de7c2205fdfe3b4845
 data/scary_troller/function/make_me_troller.mcfunction:4f7f24f4d1100cbd26197a1f0ed4fd560a692507
 data/scary_troller/function/give_non_troll_weapons.mcfunction:82cb8010e68975aca2d9ea426066d5ff4f11d172
+data/scary_troller/function/give_key.mcfunction:a9a62af389b4df95289dc931d224890bf7086fbe
 data/scary_troller/tags/block/scary_blocks.json:c8fdab4271be9cb5747691d2178d91ab5c9a6313
 data/minecraft/tags/function/load.json:ff495f313219634e6d6cb2a04818d183449ee171
 data/minecraft/tags/function/tick.json:06ed9329835afe595b79783d66cf6675c6ec08e1

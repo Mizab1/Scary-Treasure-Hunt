@@ -1,0 +1,9 @@
+# Generated with MC-Build
+
+# Store the count of the key(s)
+execute store result score @s key_count run clear @s fermented_spider_eye[custom_data={tool:"key"}] 0
+execute if score @s key_count matches 1 run title @a actionbar {"text":"\uE000"}
+execute if score @s key_count matches 2 run title @a actionbar {"text":"\uE000\uE000"}
+execute if score @s key_count matches 3 run title @a actionbar {"text":"\uE000\uE000\uE000"}
+execute if score @s key_count matches 4 run title @a actionbar {"text":"\uE000\uE000\uE000\uE000"}
+execute if score @s key_count matches 5.. run title @a actionbar {"text":"\uE000\uE000\uE000\uE000\uE000"}

@@ -7,6 +7,7 @@ dir private {
         scoreboard objectives add mcb.internal dummy
         scoreboard objectives add rc_detect minecraft.used:minecraft.carrot_on_a_stick
         scoreboard objectives add item_select dummy
+        scoreboard objectives add key_count dummy
 
         scoreboard objectives add pos_x1 dummy
         scoreboard objectives add pos_y1 dummy
@@ -306,6 +307,16 @@ dir private {
                 }
                 kill @s
             }
+
+            # Count the number of key for each player and display corresponding number of custom key font to them
+            execute as @a run {
+                # Store the count of the key(s)
+                execute store result score @s key_count run clear @s fermented_spider_eye[custom_data={tool:"key"}] 0
+
+                REPEAT (1, 5) as i {
+                    execute if score @s key_count matches <%i < 5? i: i + ".."%> run title @a actionbar {"text":"<%"\\uE000".repeat(i)%>"}
+                }
+            }
         }
     }
 
@@ -392,6 +403,9 @@ function give_non_troll_weapons{
     give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Snowball Gun"}',lore=['"Right-click to shoot snowball"'],custom_data={tool:"snowball_gun"},item_model="snowball_gun"] 1
     give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Grenade Launcher"}',lore=['"Right-click to shoot grenade"'],custom_data={tool:"grenade_launcher"},item_model="grenade_launcher"] 1
     give @s arrow 64
+}
+function give_key{
+    give @s fermented_spider_eye[custom_name='{"italic":false,"text":"Key"}',custom_data={tool:"key"},item_model="key"]
 }
 
 #! JSONs

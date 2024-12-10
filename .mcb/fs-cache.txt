@@ -42,7 +42,7 @@ data/scary_troller/function/private/clocks/zzz/3.mcfunction:d54af8e0f8ea3e45dc67
 data/scary_troller/function/private/clocks/zzz/7.mcfunction:4aa306ae536868a5184c23249d23ada02c1b2fb7
 data/scary_troller/function/private/clocks/zzz/6.mcfunction:a01c801f7246440edfcba2ddce0ac0f5dfdf7938
 data/scary_troller/function/private/clocks/clock_20t.mcfunction:70df8d4135700a12d48fcfa66780d769db052b43
-data/scary_troller/function/private/clocks/zzz/10.mcfunction:35b3819f8607b7cee627d664bd51230ca9a8b24c
+data/scary_troller/function/private/clocks/zzz/10.mcfunction:be4d9a1d01f6b9d1637a67d8964759a80f6561af
 data/scary_troller/function/private/clocks/zzz/9.mcfunction:ea5ec23e2dd548f8b06abdbaa9ed4468cd8c90b9
 data/scary_troller/function/private/clocks/zzz/12.mcfunction:04928f3f949964a8fe2eec3f8f40d7f150c36230
 data/scary_troller/function/private/clocks/zzz/11.mcfunction:192560df1e14c72b848efa568b659556e519a273

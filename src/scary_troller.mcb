@@ -217,9 +217,9 @@ dir private {
             execute as @e[type=marker, tag=creeper_trap_marker] at @s run{
                 particle dust{color:[1.000,0.000,0.000],scale:1} ~ ~ ~ .1 .1 .1 1 2 normal
                 execute if entity @a[tag=!troller, distance=..3] run{
-                    summon creeper ~ ~ ~ {DeathLootTable:"empty", Tags:["scary_generated"]}
+                    summon creeper ~ ~ ~ {CustomName:'"Scary Creeper"',DeathLootTable:"empty", Tags:["scary_generated"]}
                     REPEAT (1, 4) {
-                        summon vex ~ ~ ~ {DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
+                        summon vex ~ ~ ~ {CustomName:'"Ghost"',DeathLootTable:"empty",Tags:["scary_generated"],HandItems:[{id:"minecraft:air",count:1},{}],HandDropChances:[0.000F,0.000F]}
                     }
 
                     # Kill the marker

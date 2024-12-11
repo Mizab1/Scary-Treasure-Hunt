@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "custom/traps/creeper_trap"
+		"layer0": "custom/traps/water_trap"
 	}
 }

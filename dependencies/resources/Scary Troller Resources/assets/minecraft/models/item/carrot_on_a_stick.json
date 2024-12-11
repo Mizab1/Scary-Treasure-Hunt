@@ -5,8 +5,21 @@
   },
   "overrides": [
       { "predicate": {"custom_model_data":100005}, "model": "item/custom/traps/trap_diffuser"},
+      { "predicate": {"custom_model_data":100007}, "model": "item/custom/traps/random_teleport_trap"},
+      { "predicate": {"custom_model_data":100009}, "model": "item/custom/traps/lidcreak_sound_trap"},
+      { "predicate": {"custom_model_data":100010}, "model": "item/custom/traps/dark_slam_sound_trap"},
+      { "predicate": {"custom_model_data":100011}, "model": "item/custom/traps/spooky_ambience_sound_trap"},
+      { "predicate": {"custom_model_data":100012}, "model": "item/custom/traps/supernatural_sound_trap"},
+      { "predicate": {"custom_model_data":100013}, "model": "item/custom/traps/cage"},
+      { "predicate": {"custom_model_data":100015}, "model": "item/custom/traps/levitation_wand"},
+      { "predicate": {"custom_model_data":100016}, "model": "item/custom/traps/blindness_wand"},
+      
+      { "predicate": {"custom_model_data":100051}, "model": "item/custom/player_weapons/laser_gun"},
+      { "predicate": {"custom_model_data":100052}, "model": "item/custom/player_weapons/snowball_gun"},
+      { "predicate": {"custom_model_data":100053}, "model": "item/custom/player_weapons/grenade_launcher"},
 
-      { "predicate": {"custom_model_data":111001}, "model": "item/custom/backward_arrow"},
-      { "predicate": {"custom_model_data":111002}, "model": "item/custom/forward_arrow"}
+      { "predicate": {"custom_model_data":111001}, "model": "item/custom/previous_arrow"},
+      { "predicate": {"custom_model_data":111002}, "model": "item/custom/next_arrow"},
+      { "predicate": {"custom_model_data":111003}, "model": "item/custom/key"}
   ]
 }

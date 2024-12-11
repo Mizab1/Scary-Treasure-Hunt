@@ -302,7 +302,7 @@ dir private {
             execute as @e[type=endermite, tag=herobrine_spawner_marker] at @s run{
                 summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["new","herobrine_trap", "scary_generated"], ArmorItems:[{},{},{},{id:"minecraft:wooden_hoe",count:1,components:{"minecraft:item_model":"herobrine_trap"}}]}
                 execute as @e[type=armor_stand, tag=herobrine_trap, tag=new, distance=..3] at @s run{
-                    rotate @s facing entity @p[tag=troller]
+                    # rotate @s facing entity @p[tag=troller]
                     tag @s remove new
                 }
                 kill @s
@@ -323,40 +323,40 @@ dir private {
     #! Forward and Backward stick handler
     <%%
         let items = [
-            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["creeper_trap_spawner_marker"]},custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"'],custom_data={tool:"creeper_trap"},minecraft:item_model=creeper_trap] `,
+            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["creeper_trap_spawner_marker"]},custom_name='{"italic":false,"text":"Creeper Trap"}',lore=['"Summons a creeper when the player is nearby"'],custom_data={tool:"creeper_trap"},custom_model_data=100001] `,
 
-            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["guardian_trap_spawner_marker"]},custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Displays the guardian particle to the nearby player"'],custom_data={tool:"guardian_trap"},minecraft:item_model=guardian_trap] `,
+            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["guardian_trap_spawner_marker"]},custom_name='{"italic":false,"text":"Guardian Trap"}',lore=['"Displays the guardian particle to the nearby player"'],custom_data={tool:"guardian_trap"},custom_model_data=100002] `,
             
-            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["hole_block_spawner_marker"]},custom_name='{"italic":false,"text":"Hole Block"}',lore=['"Spawns a worm when a"','"player passes by"'],custom_data={tool:"hole_block_trap"},minecraft:item_model=hole_block_trap] `,
+            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["hole_block_spawner_marker"]},custom_name='{"italic":false,"text":"Hole Block"}',lore=['"Spawns a worm when a"','"player passes by"'],custom_data={tool:"hole_block_trap"},custom_model_data=100003] `,
 
-            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["landmine_spawner_marker"]},custom_name='{"italic":false,"text":"Landmine"}',lore=['"Places a landmine which explodes"','"when a player steps on it"'],custom_data={tool:"landmine_trap"},minecraft:item_model=landmine_trap] `,
+            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["landmine_spawner_marker"]},custom_name='{"italic":false,"text":"Landmine"}',lore=['"Places a landmine which explodes"','"when a player steps on it"'],custom_data={tool:"landmine_trap"},custom_model_data=100004] `,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Trap Diffuser"}',lore=['"Disable all the traps within ${global["diffuser_radius"]} blocks radius."'],custom_data={tool:"trap_diffuser"},minecraft:item_model=trap_diffuser]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Trap Diffuser"}',lore=['"Disable all the traps within ${global["diffuser_radius"]} blocks radius."'],custom_data={tool:"trap_diffuser"},custom_model_data=100005]`,
 
-            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["fire_stone_spawner_marker"]},custom_name='{"italic":false,"text":"Fire Stone"}',lore=['"Places a stone which when mined sets"','"the nearby area ablaze"'],custom_data={tool:"fire_stone_trap"},minecraft:item_model=fire_stone_trap] `,
+            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["fire_stone_spawner_marker"]},custom_name='{"italic":false,"text":"Fire Stone"}',lore=['"Places a stone which when mined sets"','"the nearby area ablaze"'],custom_data={tool:"fire_stone_trap"},custom_model_data=100006] `,
 
             `stick[enchantment_glint_override=true,custom_name='{"italic":false,"text":"Knockback Stick"}',lore=['"Deals humongous amount of knockback"','"to enemies"'],enchantments={levels:{"minecraft:knockback":25},show_in_tooltip:false}]`,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Random Teleport"}',lore=['"Randomly teleport all the enemies."'],custom_data={tool:"random_teleport_trap"},minecraft:item_model=random_teleport_trap]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Random Teleport"}',lore=['"Randomly teleport all the enemies."'],custom_data={tool:"random_teleport_trap"},custom_model_data=100007]`,
 
-            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["water_spawner_marker"]},custom_name='{"italic":false,"text":"Water Trap"}',lore=['"Summons fangs in water when a player is nearby"','"Can only be placed in water"'],custom_data={tool:"water_trap"},minecraft:item_model=water_trap] `,
+            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["water_spawner_marker"]},custom_name='{"italic":false,"text":"Water Trap"}',lore=['"Summons fangs in water when a player is nearby"','"Can only be placed in water"'],custom_data={tool:"water_trap"},custom_model_data=100008] `,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 1"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"lidcreak_sound_trap"},minecraft:item_model=lidcreak_sound_trap]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 1"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"lidcreak_sound_trap"},custom_model_data=100009]`,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 2"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"dark_slam_sound_trap"},minecraft:item_model=dark_slam_sound_trap]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 2"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"dark_slam_sound_trap"},custom_model_data=100010]`,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 3"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"spooky_ambience_sound_trap"},minecraft:item_model=spooky_ambience_sound_trap]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 3"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"spooky_ambience_sound_trap"},custom_model_data=100011]`,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 4"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"supernatural_sound_trap"},minecraft:item_model=supernatural_sound_trap]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 4"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"supernatural_sound_trap"},custom_model_data=100012]`,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Cage Trap"}',lore=['"Right-click to cage nearby players,"', '"up to ${global["freeze_player_trap_reach"]} blocks."'],custom_data={tool:"freeze_trap"},minecraft:item_model=freeze_trap]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Cage Trap"}',lore=['"Right-click to cage nearby players,"', '"up to ${global["freeze_player_trap_reach"]} blocks."'],custom_data={tool:"freeze_trap"},custom_model_data=100013]`,
 
-            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["herobrine_spawner_marker"]},custom_name='{"italic":false,"text":"Herobrine Trap"}',lore=['"Summons herobrine statue when a player is nearby"','"Rotated as the troller"'],custom_data={tool:"herobrine_trap"},minecraft:item_model=herobrine_trap] `,
+            `endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["herobrine_spawner_marker"]},custom_name='{"italic":false,"text":"Herobrine Trap"}',lore=['"Summons herobrine statue when a player is nearby"','"Rotated as the troller"'],custom_data={tool:"herobrine_trap"},custom_model_data=100014] `,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Levitation Wand"}',lore=['"Right-click to levitate the player you are aiming at"'],custom_data={tool:"levitation_wand"},minecraft:item_model=levitation_wand]`,
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Levitation Wand"}',lore=['"Right-click to levitate the player you are aiming at"'],custom_data={tool:"levitation_wand"},custom_model_data=100015]`,
 
-            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Blindness Wand"}',lore=['"Right-click to blind the player you are aiming at"'],custom_data={tool:"blindness_wand"},minecraft:item_model=blindness_wand]`,
-            ]
+            `carrot_on_a_stick[custom_name='{"italic":false,"text":"Blindness Wand"}',lore=['"Right-click to blind the player you are aiming at"'],custom_data={tool:"blindness_wand"},custom_model_data=100016]`,
+        ]
         global["ITEMS_LENGTH"] = items.length
         global["ITEMS"] = items
         console.log(global["ITEMS_LENGTH"] - 8) + 1
@@ -375,10 +375,10 @@ dir private {
             }
         }
         function give_items{
-            item replace entity @s hotbar.0 with carrot_on_a_stick[minecraft:item_model=previous_arrow, custom_data={tool:"previous_arrow"}, minecraft:item_name='{"text":"Previous"}'] 1
+            item replace entity @s hotbar.0 with carrot_on_a_stick[custom_model_data=111001, custom_data={tool:"previous_arrow"}, minecraft:item_name='{"text":"Previous"}'] 1
             scoreboard players set @s item_select 0
             function ./cycle_item_check
-            item replace entity @s hotbar.8 with carrot_on_a_stick[minecraft:item_model=next_arrow, custom_data={tool:"next_arrow"}, minecraft:item_name='{"text":"Next"}'] 1
+            item replace entity @s hotbar.8 with carrot_on_a_stick[custom_model_data=111002, custom_data={tool:"next_arrow"}, minecraft:item_name='{"text":"Next"}'] 1
         }
     }
     # function test {
@@ -397,15 +397,15 @@ function make_me_troller{
     function *private/cycle_items/give_items
 }
 function give_non_troll_weapons{
-    give @s iron_sword[custom_name='{"italic":false,"text":"Super Sword"}',lore=['"Gives increased strength and"','"increased speed to the bearer"'],attribute_modifiers={modifiers:[{id:"attack_damage",type:"attack_damage",amount:6,operation:"add_value"},{id:"movement_speed",type:"movement_speed",amount:0.1,operation:"add_value"}],show_in_tooltip:false}] 1
+    give @s iron_sword[custom_name='{"italic":false,"text":"Super Sword"}',lore=['"Gives increased strength and"','"increased speed to the bearer"'],attribute_modifiers={modifiers:[{id:"attack_damage",type:"generic.attack_damage",amount:6,operation:"add_value"},{id:"movement_speed",type:"generic.movement_speed",amount:0.1,operation:"add_value"}],show_in_tooltip:false}] 1
     give @s crossbow[custom_name='{"italic":false,"text":"Rapid-fire Crossbow"}',lore=['"A special crossbow for shooting"','"arrows in a quick succession"'],enchantments={levels:{"minecraft:quick_charge":100},show_in_tooltip:false}] 1
-    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Laser Gun"}',lore=['"Right-click to shoot laser beam"'],custom_data={tool:"laser_gun"},item_model="laser_gun"] 1
-    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Snowball Gun"}',lore=['"Right-click to shoot snowball"'],custom_data={tool:"snowball_gun"},item_model="snowball_gun"] 1
-    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Grenade Launcher"}',lore=['"Right-click to shoot grenade"'],custom_data={tool:"grenade_launcher"},item_model="grenade_launcher"] 1
+    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Laser Gun"}',lore=['"Right-click to shoot laser beam"'],custom_data={tool:"laser_gun"},custom_model_data=100051] 1
+    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Snowball Gun"}',lore=['"Right-click to shoot snowball"'],custom_data={tool:"snowball_gun"},custom_model_data=100052] 1
+    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Grenade Launcher"}',lore=['"Right-click to shoot grenade"'],custom_data={tool:"grenade_launcher"},custom_model_data=100053] 1
     give @s arrow 64
 }
 function give_key{
-    give @s fermented_spider_eye[custom_name='{"italic":false,"text":"Key"}',custom_data={tool:"key"},item_model="key"]
+    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Key"}',custom_data={tool:"key"},custom_model_data=111003]
 }
 
 #! JSONs

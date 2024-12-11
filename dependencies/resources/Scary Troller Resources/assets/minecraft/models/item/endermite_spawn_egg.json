@@ -10,6 +10,8 @@
       { "predicate": {"custom_model_data":100002}, "model": "item/custom/traps/guardian_trap"},
       {"predicate": {"custom_model_data":100003}, "model":"item/custom/traps/hole_block_trap"},
       {"predicate": {"custom_model_data":100004}, "model":"item/custom/traps/landmine_trap"},
-      {"predicate": {"custom_model_data":100006}, "model":"item/custom/traps/fire_stone"}
+      {"predicate": {"custom_model_data":100006}, "model":"item/custom/traps/fire_stone_trap"},
+      { "predicate": {"custom_model_data":100008}, "model": "item/custom/traps/water_trap"},
+      {"predicate": {"custom_model_data":100014}, "model":"item/custom/traps/herobrine_trap"}
   ]
 }

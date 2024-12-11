@@ -17,6 +17,8 @@ dir private {
         scoreboard objectives add pos_y2 dummy
         scoreboard objectives add pos_z2 dummy
 
+        team add troller
+        team modify troller collisionRule never
     }
     function on_tick minecraft:tick {
         execute as @a[scores={rc_detect=1..}] at @s run{
@@ -178,6 +180,10 @@ dir private {
             # Reset click
             scoreboard players reset @s rc_detect
         }
+
+        # Teleport the troller entity to the troller
+        function ./troller_entity/teleport_entity_to_troller
+        execute as @a[tag=troller] at @s unless entity @e[type=mutantmonsters:mutant_enderman,tag=troller_entity,distance=..4] run function ./troller_entity/summon_entity
     } 
 
     #! Clocks
@@ -311,10 +317,10 @@ dir private {
             # Count the number of key for each player and display corresponding number of custom key font to them
             execute as @a run {
                 # Store the count of the key(s)
-                execute store result score @s key_count run clear @s fermented_spider_eye[custom_data={tool:"key"}] 0
+                execute store result score @s key_count run clear @s carrot_on_a_stick[custom_model_data=111003] 0
 
                 REPEAT (1, 5) as i {
-                    execute if score @s key_count matches <%i < 5? i: i + ".."%> run title @a actionbar {"text":"<%"\\uE000".repeat(i)%>"}
+                    execute if score @s key_count matches <%i < 5? i: i + ".."%> run title @s actionbar {"text":"<%"\\uE000".repeat(i)%>"}
                 }
             }
         }
@@ -381,20 +387,40 @@ dir private {
             item replace entity @s hotbar.8 with carrot_on_a_stick[custom_model_data=111002, custom_data={tool:"next_arrow"}, minecraft:item_name='{"text":"Next"}'] 1
         }
     }
-    # function test {
-    #     <%%
-    #         global["Item"] = "Hello";
-    #         console.log(global)
-    #     %%>
-    #     <%%
-    #         console.log(global)
-    #     %%>
-    # }
+    dir troller_entity{
+        function summon_entity{
+            summon mutantmonsters:mutant_enderman ~ ~ ~ {NoAI:1b,Tags:["troller_entity"],Team:"troller",DeathLootTable:"empty"}
+        }
+        function teleport_entity_to_troller{
+            execute as @e[type=mutantmonsters:mutant_enderman,tag=troller_entity] at @s run{
+                execute if entity @a[tag=troller,distance=..4] run{
+                    tp @s @a[tag=troller,distance=..4,limit=1,sort=nearest]
+                } else execute unless entity @a[tag=troller,distance=..4] run {
+                    tp @s ~ ~-600 ~
+                }
+            }
+        }
+        function kill_troller_entity{
+            kill @e[type= mutantmonsters:mutant_enderman]
+            kill @e[type= mutantmonsters:endersoul_clone]
+            kill @e[type= mutantmonsters:endersoul_fragment]
+        }
+    }
 }
 
 function make_me_troller{
     tag @s add troller
     function *private/cycle_items/give_items
+    team join troller @s
+    effect give @s minecraft:invisibility infinite 1 true
+    # function *private/troller_entity/summon_entity
+}
+function remove_troller{
+    tag @a[tag=troller] remove troller
+    effect clear @s minecraft:invisibility
+    team leave @s
+    clear @s
+    kill @e[type= mutantmonsters:mutant_enderman,tag=troller_entity]
 }
 function give_non_troll_weapons{
     give @s iron_sword[custom_name='{"italic":false,"text":"Super Sword"}',lore=['"Gives increased strength and"','"increased speed to the bearer"'],attribute_modifiers={modifiers:[{id:"attack_damage",type:"generic.attack_damage",amount:6,operation:"add_value"},{id:"movement_speed",type:"generic.movement_speed",amount:0.1,operation:"add_value"}],show_in_tooltip:false}] 1
@@ -413,3 +439,12 @@ tag blocks scary_blocks replace {
     orange_glazed_terracotta
     light_blue_terracotta
 }
+# function test {
+#     <%%
+#         global["Item"] = "Hello";
+#         console.log(global)
+#     %%>
+#     <%%
+#         console.log(global)
+#     %%>
+# }

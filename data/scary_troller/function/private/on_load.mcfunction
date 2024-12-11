@@ -10,3 +10,5 @@ scoreboard objectives add pos_z1 dummy
 scoreboard objectives add pos_x2 dummy
 scoreboard objectives add pos_y2 dummy
 scoreboard objectives add pos_z2 dummy
+team add troller
+team modify troller collisionRule never

@@ -2,5 +2,10 @@
 	"parent": "item/generated",
 	"textures": {
 		"layer0": "custom/next_arrow"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"scale": [0, 0, 0]
+		}
 	}
 }

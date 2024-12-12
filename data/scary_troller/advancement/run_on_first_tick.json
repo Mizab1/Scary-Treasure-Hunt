@@ -1,0 +1,1 @@
+{"criteria":{"":{"trigger": "minecraft:tick"}},"rewards":{"function": "scary_troller:private/run_on_first_tick"}}

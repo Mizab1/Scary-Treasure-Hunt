@@ -557,6 +557,14 @@ dir private {
             summon text_display -158 279 -190 {billboard:"fixed",Tags:["completion_text"],transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[2f,2f,2f]},text:'{"color":"dark_blue","text":"Thanks for playing!"}',background:16711680}
         }
     }
+    function run_on_first_tick{
+        #! This will only run as a player and on their first tick
+        # /advancement revoke Mizab only scary_troller:run_on_first_tick
+        # The above command is used to revoke this advancement
+
+        spawnpoint @s -148 94 -176
+        tp @s -148 94 -176 120 0
+    }
 }
 
 function make_me_troller{
@@ -605,6 +613,17 @@ advancement right_click_detection {
         "function": "scary_troller:private/click_detection/right_click_detection"
     }
 }
+advancement run_on_first_tick{
+    "criteria": {
+        "": {
+            "trigger": "minecraft:tick"
+        }
+    },
+    "rewards": {
+        "function": "scary_troller:private/run_on_first_tick"
+    }
+}
+
 # function test {
 #     <%%
 #         global["Item"] = "Hello";

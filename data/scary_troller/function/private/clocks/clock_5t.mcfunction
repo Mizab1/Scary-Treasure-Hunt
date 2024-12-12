@@ -17,3 +17,5 @@ execute as @e[type=endermite, tag=water_spawner_marker] at @s run function scary
 execute as @e[type=endermite, tag=herobrine_spawner_marker] at @s run function scary_troller:private/clocks/zzz/26
 # Count the number of key for each player and display corresponding number of custom key font to them
 execute as @a run function scary_troller:private/clocks/zzz/28
+# Check for player presence near the teleport marker
+execute as @e[type=marker,tag=teleport_marker] at @s if entity @a[distance=..2] run function scary_troller:private/clocks/zzz/29

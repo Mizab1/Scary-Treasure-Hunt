@@ -330,6 +330,29 @@ dir private {
                     execute if score @s key_count matches <%i < 5? i: i + ".."%> run title @s actionbar {"text":"<%"\\uE000".repeat(i)%>"}
                 }
             }
+
+            # Check for player presence near the teleport marker
+            execute as @e[type=marker,tag=teleport_marker] at @s if entity @a[distance=..2] run{
+                tp @a -158 277 -184 -180 0
+                execute as @a at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 1
+
+                # Fireworks
+                summon firework_rocket -162 277 -189 {LifeTime:15,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"small_ball",has_twinkle:true,colors:[I;4259648,9205247,8060878]}]}}}}
+                summon firework_rocket -162 277 -188 {LifeTime:12,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"burst",colors:[I;10747842,16739297,8257427]}]}}}}
+                summon firework_rocket -161 277 -189 {LifeTime:13,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"burst",colors:[I;10747842,16739297,8257427]}]}}}}
+
+                summon firework_rocket -154 277 -189 {LifeTime:15,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"small_ball",has_twinkle:true,colors:[I;4259648,9205247,8060878]}]}}}}
+                summon firework_rocket -155 277 -189 {LifeTime:12,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"burst",colors:[I;10747842,16739297,8257427]}]}}}}
+                summon firework_rocket -154 277 -188 {LifeTime:13,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"burst",colors:[I;10747842,16739297,8257427]}]}}}}
+
+                summon firework_rocket -154 277 -181 {LifeTime:15,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"small_ball",has_twinkle:true,colors:[I;4259648,9205247,8060878]}]}}}}
+                summon firework_rocket -155 277 -181 {LifeTime:12,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"burst",colors:[I;10747842,16739297,8257427]}]}}}}
+                summon firework_rocket -154 277 -182 {LifeTime:13,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"burst",colors:[I;10747842,16739297,8257427]}]}}}}
+
+                summon firework_rocket -162 277 -181 {LifeTime:15,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"small_ball",has_twinkle:true,colors:[I;4259648,9205247,8060878]}]}}}}
+                summon firework_rocket -161 277 -181 {LifeTime:12,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"burst",colors:[I;10747842,16739297,8257427]}]}}}}
+                summon firework_rocket -162 277 -182 {LifeTime:13,FireworksItem:{id:"minecraft:firework_rocket",count:1,components:{"minecraft:fireworks":{explosions:[{shape:"burst",colors:[I;10747842,16739297,8257427]}]}}}}
+            }
         }
     }
 
@@ -426,20 +449,27 @@ dir private {
         function spawn_door_marker{
             summon marker ~ ~ ~ {Tags:["door_marker"]}
         }
+        function spawn_teleport_marker{
+            summon marker ~ ~ ~ {Tags:["teleport_marker"]}
+        }
         function place_door_structure{
             function ./kill_door_entities
+
+            setblock -155 96 -181 air
+            setblock -155 96 -181 stone
+
+            setblock -155 96 -178 air
+            setblock -155 96 -178 stone
 
             # Place the key holders with their respective entities
             <%%
                 let key_holder_coords = [
                     `-155 94 -181`,
                     `-155 95 -181`,
-                    `-155 96 -181`,
 
                     `-155 96 -180`,
                     `-155 96 -179`,
 
-                    `-155 96 -178`,
                     `-155 95 -178`,
                     `-155 94 -178`
                 ]
@@ -468,6 +498,7 @@ dir private {
                     }
                 })
             %%>
+            execute positioned -158.8 94 -179 run function ./spawn_teleport_marker
         }
         function open_door{
             execute at @e[type=marker,tag=door_marker] run{
@@ -481,6 +512,7 @@ dir private {
             # fill -155 94 -179 -155 94 -179 air
             kill @e[type=interaction,tag=key_holder]
             kill @e[type=marker,tag=door_marker]
+            kill @e[type=marker,tag=teleport_marker]
             scoreboard players set key_inserted private 0
         }
     }
@@ -491,7 +523,13 @@ dir private {
             tag @s add this
             # execute if data entity @s SelectedItem{id:"minecraft:carrot_on_a_stick",components:{"minecraft:custom_data":{tool:"key"}}} run{
             # }
-            execute as @e[type=interaction,tag=key_holder,tag=!activated,distance=..6] at @s run function ./find_targeted
+            execute if data entity @s SelectedItem{id:"minecraft:carrot_on_a_stick",components:{"minecraft:custom_data":{tool:"key"}}} \
+                as @e[type=interaction,tag=key_holder,tag=!activated,distance=..6] \
+                at @s \
+                run{
+                    function ./find_targeted
+                }
+            execute as @e[type=interaction,tag=key_holder] run data remove entity @s interaction
             tag @s remove this
         }
         function find_targeted{
@@ -511,6 +549,12 @@ dir private {
                 fill ~ ~ ~ ~ ~ ~ dark_prismarine
                 data remove entity @s interaction
             }
+        }
+    }
+    dir celebration_room{
+        function create_text{
+            summon text_display -158 278 -190 {billboard:"fixed",Tags:["completion_text"],transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[2f,2f,2f]},text:'{"color":"dark_blue","text":"Hope you\'ve enjoyed!"}',background:16711680}
+            summon text_display -158 279 -190 {billboard:"fixed",Tags:["completion_text"],transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[2f,2f,2f]},text:'{"color":"dark_blue","text":"Thanks for playing!"}',background:16711680}
         }
     }
 }

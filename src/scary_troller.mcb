@@ -186,6 +186,11 @@ dir private {
         function ./troller_entity/teleport_entity_to_troller
         execute as @a[tag=troller] at @s unless entity @e[type=mutantmonsters:mutant_enderman,tag=troller_entity,distance=..4] run function ./troller_entity/summon_entity
         execute as @e[type=mutantmonsters:mutant_enderman,tag=troller_entity] at @s unless entity @a[distance=..4] run kill @s
+
+        # Check score and open the door
+        execute if score key_inserted private matches 5.. run{
+            function ./door/open_door
+        }
     } 
 
     #! Clocks
@@ -411,23 +416,101 @@ dir private {
             kill @e[type= mutantmonsters:endersoul_fragment]
         }
     }
+    dir door{
+        #! WARNING: You have to manually place the door with all of it blocks and entities like the marker and interaction entities
+
+        function spawn_key_holder{
+            # fill -155 94 -179 -155 94 -179 prismarine
+            summon interaction ~ ~ ~ {width:1.05f,height:1.05f,Tags:["key_holder"]}
+        }
+        function spawn_door_marker{
+            summon marker ~ ~ ~ {Tags:["door_marker"]}
+        }
+        function place_door_structure{
+            function ./kill_door_entities
+
+            # Place the key holders with their respective entities
+            <%%
+                let key_holder_coords = [
+                    `-155 94 -181`,
+                    `-155 95 -181`,
+                    `-155 96 -181`,
+
+                    `-155 96 -180`,
+                    `-155 96 -179`,
+
+                    `-155 96 -178`,
+                    `-155 95 -178`,
+                    `-155 94 -178`
+                ]
+                key_holder_coords.forEach(i => {
+                    emit(`setblock ${i} air`)
+                    emit(`setblock ${i} blackstone`)
+                    emit.mcb(`execute positioned ${i} run function ./spawn_key_holder`)
+                })
+
+                let door_coords = [
+                    `-155 94 -179`,
+                    `-155 94 -180`
+                ]
+                door_coords.forEach((i, idx) => {
+                    let [x, y, z] = i.split(" ")
+                    
+                    emit(`setblock ${i} air`)
+                    emit.mcb(`execute positioned ${i} run function ./spawn_door_marker`)
+
+                    if (idx === 0){
+                        emit(`setblock ${i} iron_door[half=lower,open=true,hinge=right]`)
+                        emit(`setblock ${x} ${+y+1} ${z} iron_door[half=upper,open=true,hinge=right]`)
+                    } else {
+                        emit(`setblock ${i} iron_door[half=lower,open=true,facing=south]`)
+                        emit(`setblock ${x} ${+y+1} ${z} iron_door[half=upper,open=true,facing=south]`)
+                    }
+                })
+            %%>
+        }
+        function open_door{
+            execute at @e[type=marker,tag=door_marker] run{
+                setblock ~ ~ ~ air
+                setblock ~ ~1 ~ air
+
+                kill @s
+            }
+        }
+        function kill_door_entities{
+            # fill -155 94 -179 -155 94 -179 air
+            kill @e[type=interaction,tag=key_holder]
+            kill @e[type=marker,tag=door_marker]
+            scoreboard players set key_inserted private 0
+        }
+    }
     dir click_detection{
         function right_click_detection{
-            advancement revoke @s only scary_troller:right_click_detection
-
-            say [dp] right
+            advancement revoke @s only <%context["namespace"]%>:right_click_detection
 
             tag @s add this
-            execute as @e[type=interaction,distance=..6] run function ./find_targeted
+            # execute if data entity @s SelectedItem{id:"minecraft:carrot_on_a_stick",components:{"minecraft:custom_data":{tool:"key"}}} run{
+            # }
+            execute as @e[type=interaction,tag=key_holder,tag=!activated,distance=..6] at @s run function ./find_targeted
             tag @s remove this
         }
         function find_targeted{
             scoreboard players set #bool private 0
-            execute on target store result score #bool private if entity @s[tag=this]
+            execute on target run{
+                clear @s minecraft:carrot_on_a_stick[minecraft:custom_data={tool:"key"}] 1
+                execute store result score #bool private if entity @s[tag=this]
+            }
 
-            execute if score #bool private matches 1 at @s run particle happy_villager ~ ~0.5 ~ 0 0 0 0 1
+            execute if score #bool private matches 1 run{
+                execute unless score key_inserted private matches 0.. run scoreboard players set key_inserted private 0
+                scoreboard players add key_inserted private 1
 
-            execute if score #bool private matches 1 run data remove entity @s interaction
+                playsound minecraft:block.vault.open_shutter master @a ~ ~ ~ 1 0.5
+                particle happy_villager ~ ~2 ~ 0 0 0 0 1
+                tag @s add activated
+                fill ~ ~ ~ ~ ~ ~ dark_prismarine
+                data remove entity @s interaction
+            }
         }
     }
 }

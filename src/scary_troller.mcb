@@ -8,6 +8,7 @@ dir private {
         scoreboard objectives add rc_detect minecraft.used:minecraft.carrot_on_a_stick
         scoreboard objectives add item_select dummy
         scoreboard objectives add key_count dummy
+        scoreboard objectives add private dummy
 
         scoreboard objectives add pos_x1 dummy
         scoreboard objectives add pos_y1 dummy
@@ -410,6 +411,25 @@ dir private {
             kill @e[type= mutantmonsters:endersoul_fragment]
         }
     }
+    dir click_detection{
+        function right_click_detection{
+            advancement revoke @s only scary_troller:right_click_detection
+
+            say [dp] right
+
+            tag @s add this
+            execute as @e[type=interaction,distance=..6] run function ./find_targeted
+            tag @s remove this
+        }
+        function find_targeted{
+            scoreboard players set #bool private 0
+            execute on target store result score #bool private if entity @s[tag=this]
+
+            execute if score #bool private matches 1 at @s run particle happy_villager ~ ~0.5 ~ 0 0 0 0 1
+
+            execute if score #bool private matches 1 run data remove entity @s interaction
+        }
+    }
 }
 
 function make_me_troller{
@@ -442,6 +462,21 @@ function give_key{
 tag blocks scary_blocks replace {
     orange_glazed_terracotta
     light_blue_terracotta
+}
+advancement right_click_detection {
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:player_interacted_with_entity",
+            "conditions": {
+                "entity": {
+                    "type": "interaction"
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "scary_troller:private/click_detection/right_click_detection"
+    }
 }
 # function test {
 #     <%%

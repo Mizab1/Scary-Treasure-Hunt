@@ -2,9 +2,9 @@
 
 function scary_troller:private/door/kill_door_entities
 setblock -155 96 -181 air
-setblock -155 96 -181 stone
+setblock -155 96 -181 bedrock
 setblock -155 96 -178 air
-setblock -155 96 -178 stone
+setblock -155 96 -178 bedrock
 # Place the key holders with their respective entities
 setblock -155 94 -181 air
 setblock -155 94 -181 blackstone

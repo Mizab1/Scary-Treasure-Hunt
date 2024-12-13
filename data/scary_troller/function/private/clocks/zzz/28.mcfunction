@@ -7,3 +7,4 @@ execute if score @s key_count matches 2 run title @s actionbar {"text":"\uE000\u
 execute if score @s key_count matches 3 run title @s actionbar {"text":"\uE000\uE000\uE000"}
 execute if score @s key_count matches 4 run title @s actionbar {"text":"\uE000\uE000\uE000\uE000"}
 execute if score @s key_count matches 5.. run title @s actionbar {"text":"\uE000\uE000\uE000\uE000\uE000"}
+execute if score @s key_count matches 6.. run title @s actionbar {"text":"\uE000\uE000\uE000\uE000\uE000\uE000"}

@@ -1,3 +1,3 @@
 # Generated with MC-Build
 
-execute at @e[type=marker,tag=door_marker] run function scary_troller:private/door/zzz/0
+execute as @e[type=marker,tag=door_marker] at @s run function scary_troller:private/door/zzz/0

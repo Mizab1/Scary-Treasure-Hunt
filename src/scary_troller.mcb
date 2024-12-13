@@ -188,7 +188,7 @@ dir private {
         execute as @e[type=mutantmonsters:mutant_enderman,tag=troller_entity] at @s unless entity @a[distance=..4] run kill @s
 
         # Check score and open the door
-        execute if score key_inserted private matches 5.. run{
+        execute if score key_inserted private matches 6.. run{
             function ./door/open_door
         }
     } 
@@ -326,7 +326,7 @@ dir private {
                 # Store the count of the key(s)
                 execute store result score @s key_count run clear @s carrot_on_a_stick[custom_model_data=111003] 0
 
-                REPEAT (1, 5) as i {
+                REPEAT (1, 6) as i {
                     execute if score @s key_count matches <%i < 5? i: i + ".."%> run title @s actionbar {"text":"<%"\\uE000".repeat(i)%>"}
                 }
             }
@@ -456,10 +456,10 @@ dir private {
             function ./kill_door_entities
 
             setblock -155 96 -181 air
-            setblock -155 96 -181 stone
+            setblock -155 96 -181 bedrock
 
             setblock -155 96 -178 air
-            setblock -155 96 -178 stone
+            setblock -155 96 -178 bedrock
 
             # Place the key holders with their respective entities
             <%%
@@ -501,7 +501,9 @@ dir private {
             execute positioned -158.8 94 -179 run function ./spawn_teleport_marker
         }
         function open_door{
-            execute at @e[type=marker,tag=door_marker] run{
+            execute as @e[type=marker,tag=door_marker] at @s run{
+                playsound minecraft:item.trident.thunder master @a ~ ~ ~ 1 0.5
+
                 setblock ~ ~ ~ air
                 setblock ~ ~1 ~ air
 

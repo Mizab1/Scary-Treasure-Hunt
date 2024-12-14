@@ -663,16 +663,17 @@ function give_key{
 function spawn_test_mobs{
     <%%
         let mobs_object = {
-            "Freddy":"zombie",
-            "Herobrine":"zombie",
-            "Steve":"zombie",
-            "Huggy Wuggy":"zombie",
+            "Ghost":"zombie",
+            "Monster":"husk",
             "Scary Creeper":"creeper",
-            "Huggy Wuggy":"enderman",
             "Siren Head":"enderman",
-            "Spider":"spider",
-            "Mutant":"husk",
-            "Skeleton":"skeleton",
+            "Worm":"spider",
+            "Infected Spider":"cave_spider",
+            "Slime":"slime",
+            "Panda":"panda",
+            "Zoglin":"zoglin",
+            "Goat":"goat",
+            "Cow":"cow",
         };
         let distance = 0;
 

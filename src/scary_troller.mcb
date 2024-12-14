@@ -660,6 +660,28 @@ function give_non_troll_weapons{
 function give_key{
     give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Key"}',custom_data={tool:"key"},custom_model_data=111003]
 }
+function spawn_test_mobs{
+    <%%
+        let mobs_object = {
+            "Freddy":"zombie",
+            "Herobrine":"zombie",
+            "Steve":"zombie",
+            "Huggy Wuggy":"zombie",
+            "Scary Creeper":"creeper",
+            "Huggy Wuggy":"enderman",
+            "Siren Head":"enderman",
+            "Spider":"spider",
+            "Mutant":"husk",
+            "Skeleton":"skeleton",
+        };
+        let distance = 0;
+
+        for (let [key, value] of Object.entries(mobs_object)) {
+            emit(`summon ${value} ~${distance * 3} ~ ~ {CustomName:'\"${key}\"',NoAI:1b,Tags:["test"],DeathLootTable:"empty",ArmorItems:[{},{},{},{id:"minecraft:chainmail_helmet",count:1}],ArmorDropChances:[0.085F,0.085F,0.085F,0.000F]}`)
+            distance++
+        }
+    %%>
+}
 
 #! JSONs
 tag blocks scary_blocks replace {

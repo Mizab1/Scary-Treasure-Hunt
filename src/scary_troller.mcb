@@ -608,7 +608,10 @@ dir private {
         }
         function place_chests{
             # Kill the chest marker
-            execute at @e[type=armor_stand,tag=chest_marker] run setblock ~ ~ ~ air
+            execute at @e[type=armor_stand,tag=chest_marker] run{
+                loot replace block ~ ~ ~ container.0 27 loot minecraft:empty
+                setblock ~ ~ ~ air
+            }
             kill @e[type=armor_stand,tag=chest_marker]
 
             function ./spawn_chest_marker
@@ -688,7 +691,41 @@ advancement run_on_first_tick{
         "function": "scary_troller:private/run_on_first_tick"
     }
 }
-
+loot_table treasure_loot {
+    "type": "minecraft:chest",
+    "pools": [
+        {
+        "rolls": 1,
+        "entries": [
+            {
+            "type": "minecraft:item",
+            "name": "minecraft:carrot_on_a_stick",
+            "functions": [
+                {
+                "function": "minecraft:set_components",
+                "components": {
+                    "minecraft:custom_name": "{\"italic\":false,\"text\":\"Key\"}",
+                    "minecraft:custom_model_data": 111003,
+                    "minecraft:custom_data": {
+                    "tool": "key"
+                    }
+                }
+                }
+            ]
+            }
+        ]
+        },
+        {
+        "rolls": 15,
+        "entries": [
+            {
+            "type": "minecraft:item",
+            "name": "minecraft:cobweb"
+            }
+        ]
+        }
+    ]
+}
 # function test {
 #     <%%
 #         global["Item"] = "Hello";

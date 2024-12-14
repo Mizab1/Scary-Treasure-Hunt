@@ -1,0 +1,33 @@
+template rng {
+    load{
+        scoreboard objectives add rng dummy
+        scoreboard players set m rng <%2**31-1%>
+        scoreboard players set a rng 1103515245
+        scoreboard players set c rng 12345
+        scoreboard players set #100000 rng 100000
+    }
+
+    with set_seed seed:int {
+        scoreboard players set state rng <%seed%>
+    }
+
+    with range min:int max:int score_holder:word objective:word {
+        rng next <%score_holder%> <%objective%>
+        scoreboard players operation <%score_holder%> <%objective%> /= #100000 rng
+        scoreboard players set min rng <%min%>
+        scoreboard players set max rng <%max%>
+        scoreboard players operation size rng = max rng
+        scoreboard players operation size rng -= min rng
+        scoreboard players operation <%score_holder%> <%objective%> %= size rng
+        scoreboard players operation <%score_holder%> <%objective%> += min rng
+    }
+
+    with next score_holder:word objective:word {
+        scoreboard players operation temp0 rng = state rng 
+        scoreboard players operation temp0 rng *= a rng
+        scoreboard players operation temp0 rng += c rng
+        scoreboard players operation temp0 rng %= m rng
+        scoreboard players operation state rng = temp0 rng
+        scoreboard players operation <%score_holder%> <%objective%> = temp0 rng
+    }
+}

@@ -1,0 +1,9 @@
+# Generated with MC-Build
+
+item replace entity @s hotbar.1 with carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 3"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"spooky_ambience_sound_trap"},custom_model_data=100011]
+item replace entity @s hotbar.2 with carrot_on_a_stick[custom_name='{"italic":false,"text":"Play Scary Sound 4"}',lore=['"Right-click to play a scary sound at your position."'],custom_data={tool:"supernatural_sound_trap"},custom_model_data=100012]
+item replace entity @s hotbar.3 with carrot_on_a_stick[custom_name='{"italic":false,"text":"Cage Trap"}',lore=['"Right-click to cage nearby players,"', '"up to 15 blocks."'],custom_data={tool:"freeze_trap"},custom_model_data=100013]
+item replace entity @s hotbar.4 with endermite_spawn_egg[entity_data={id:"minecraft:endermite",Silent:1b,NoAI:1b,Tags:["herobrine_spawner_marker"]},custom_name='{"italic":false,"text":"Herobrine Trap"}',lore=['"Summons herobrine statue when a player is nearby"','"Rotated as the troller"'],custom_data={tool:"herobrine_trap"},custom_model_data=100014] 
+item replace entity @s hotbar.5 with carrot_on_a_stick[custom_name='{"italic":false,"text":"Levitation Wand"}',lore=['"Right-click to levitate the player you are aiming at"'],custom_data={tool:"levitation_wand"},custom_model_data=100015]
+item replace entity @s hotbar.6 with carrot_on_a_stick[custom_name='{"italic":false,"text":"Blindness Wand"}',lore=['"Right-click to blind the player you are aiming at"'],custom_data={tool:"blindness_wand"},custom_model_data=100016]
+item replace entity @s hotbar.7 with zombie_spawn_egg[custom_name='{"italic":false,"text":"Spawn Ghost"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:zombie",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","ghost"],CustomName:'"Ghost"'}]

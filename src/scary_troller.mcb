@@ -392,6 +392,20 @@ dir private {
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Levitation Wand"}',lore=['"Right-click to levitate the player you are aiming at"'],custom_data={tool:"levitation_wand"},custom_model_data=100015]`,
 
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Blindness Wand"}',lore=['"Right-click to blind the player you are aiming at"'],custom_data={tool:"blindness_wand"},custom_model_data=100016]`,
+
+            `zombie_spawn_egg[custom_name='{"italic":false,"text":"Spawn Ghost"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:zombie",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","ghost"],CustomName:'"Ghost"'}]`,
+
+            `husk_spawn_egg[custom_name='{"italic":false,"text":"Spawn Monster"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:husk",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","monster"],CustomName:'"Monster"'}]`,
+
+            `creeper_spawn_egg[custom_name='{"italic":false,"text":"Spawn Degenerated Creeper"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:creeper",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","creeper"],CustomName:'"Degenerated Creeper"'}]`,
+
+            `enderman_spawn_egg[custom_name='{"italic":false,"text":"Spawn Siren Head"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:enderman",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","siren_head"],CustomName:'"Siren Head"'}]`,
+
+            `spider_spawn_egg[custom_name='{"italic":false,"text":"Spawn Worm"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:spider",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","worm"],CustomName:'"Worm"'}]`,
+
+            `cave_spider_spawn_egg[custom_name='{"italic":false,"text":"Spawn Infected Spider"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:cave_spider",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","infected_spider"],CustomName:'"Infected Spider"'}]`,
+
+            `slime_spawn_egg[custom_name='{"italic":false,"text":"Spawn Brain Jar"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:slime",DeathLootTable:"empty",Size:0,Tags:["scary_mob","scary_generated","brain_jar"],CustomName:'"Brain Jar"'}]`,
         ]
         global["ITEMS_LENGTH"] = items.length
         global["ITEMS"] = items

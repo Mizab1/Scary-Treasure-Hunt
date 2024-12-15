@@ -1,4 +1,3 @@
 # Generated with MC-Build
 
-execute if score @s item_select matches ..20 run function scary_troller:private/zzz/33
-execute if score @s item_select matches 21 run function scary_troller:private/zzz/34
+playsound minecraft:block.note_block.didgeridoo master @s ~ ~ ~ 0.5 1.2

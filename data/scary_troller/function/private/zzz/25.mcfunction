@@ -1,3 +1,4 @@
 # Generated with MC-Build
 
-damage @a[dx=0,tag=!troller,limit=1] 1 minecraft:player_attack
+playsound minecraft:entity.dragon_fireball.explode master @a ~ ~ ~ 0.5 1.5
+summon tnt ^ ^1.5 ^ {Tags:["custom_grenade"],fuse:60}

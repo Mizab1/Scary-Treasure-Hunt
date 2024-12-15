@@ -10,6 +10,9 @@ dir private {
         scoreboard objectives add key_count dummy
         scoreboard objectives add private dummy
 
+        scoreboard objectives add game dummy
+        execute unless score start game matches 0.. run scoreboard players set start game 0
+
         scoreboard objectives add pos_x1 dummy
         scoreboard objectives add pos_y1 dummy
         scoreboard objectives add pos_z1 dummy
@@ -95,31 +98,36 @@ dir private {
             }
 
             # Snowball gun logic
-            execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"snowball_gun"}}}}] run{
-                playsound minecraft:entity.snowball.throw master @a ~ ~ ~ 1 1.5
-                summon snowball ^ ^1.5 ^ {Tags:["custom_snowball"]}
-            }
-            execute as @e[type=snowball,tag=custom_snowball,tag=!processed] at @s rotated as @p run{
-                execute store result score @s pos_x1 run data get entity @s Pos[0] 1000
-                execute store result score @s pos_y1 run data get entity @s Pos[1] 1000
-                execute store result score @s pos_z1 run data get entity @s Pos[2] 1000
+            # execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"snowball_gun"}}}}] anchored eyes positioned ^ ^ ^0.5 run{
+            #     playsound minecraft:entity.snowball.throw master @a ~ ~ ~ 1 1.5
+            #     summon snowball ~ ~ ~ {Tags:["custom_snowball"]}
+            #     summon armor_stand ^ ^ ^0.5 {Tags:["snowball_proj_armor_stand"], Marker:1b}
 
-                tp @s ^ ^ ^0.1
+            #     execute as @e[type=snowball,tag=custom_snowball,tag=!processed] at @s run{
+            #         execute store result score @s pos_x1 run data get entity @s Pos[0] 100
+            #         execute store result score @s pos_y1 run data get entity @s Pos[1] 100
+            #         execute store result score @s pos_z1 run data get entity @s Pos[2] 100
 
-                execute store result score @s pos_x2 run data get entity @s Pos[0] 1000
-                execute store result score @s pos_y2 run data get entity @s Pos[1] 1000
-                execute store result score @s pos_z2 run data get entity @s Pos[2] 1000
+            #         # tp @s ^ ^ ^0.1
 
-                scoreboard players operation @s pos_x2 -= @s pos_x1
-                scoreboard players operation @s pos_y2 -= @s pos_y1
-                scoreboard players operation @s pos_z2 -= @s pos_z1 
+            #         execute store result score @s pos_x2 run data get entity @e[type=armor_stand,tag=snowball_proj_armor_stand,limit=1,sort=nearest] Pos[0] 100
+            #         execute store result score @s pos_y2 run data get entity @e[type=armor_stand,tag=snowball_proj_armor_stand,limit=1,sort=nearest] Pos[1] 100
+            #         execute store result score @s pos_z2 run data get entity @e[type=armor_stand,tag=snowball_proj_armor_stand,limit=1,sort=nearest] Pos[2] 100
 
-                execute store result entity @s Motion[0] double 0.03 run scoreboard players get @s pos_x2
-                execute store result entity @s Motion[1] double 0.03 run scoreboard players get @s pos_y2
-                execute store result entity @s Motion[2] double 0.03 run scoreboard players get @s pos_z2 
+            #         scoreboard players operation @s pos_x2 -= @s pos_x1
+            #         scoreboard players operation @s pos_y2 -= @s pos_y1
+            #         scoreboard players operation @s pos_z2 -= @s pos_z1 
 
-                tag @s add processed
-            }
+            #         execute store result entity @s Motion[0] double 0.02 run scoreboard players get @s pos_x2
+            #         execute store result entity @s Motion[1] double 0.02 run scoreboard players get @s pos_y2
+            #         execute store result entity @s Motion[2] double 0.02 run scoreboard players get @s pos_z2 
+
+            #         kill @e[type=armor_stand,tag=snowball_proj_armor_stand,sort=nearest]
+            #         tag @s add processed
+
+            #         tellraw @p {"entity":"@s","nbt":"Motion"}
+            #     }
+            # }
             
             # Laser gun logic
             execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"laser_gun"}}}}] run{
@@ -184,7 +192,7 @@ dir private {
 
         # Teleport the troller entity to the troller
         function ./troller_entity/teleport_entity_to_troller
-        # execute as @a[tag=troller] at @s unless entity @e[type=mutantmonsters:mutant_enderman,tag=troller_entity,distance=..4] run function ./troller_entity/summon_entity
+        execute as @a[tag=troller] at @s unless entity @e[type=mutantmonsters:mutant_enderman,tag=troller_entity,distance=..4] run function ./troller_entity/summon_entity
         execute as @e[type=mutantmonsters:mutant_enderman,tag=troller_entity] at @s unless entity @a[distance=..4] run kill @s
 
         # Check score and open the door
@@ -196,6 +204,11 @@ dir private {
     #! Clocks
     dir clocks {
 
+        clock clock_180s 180s {
+            execute if score start game matches 1.. run{
+                function *private/treasure_chest/glow_chests
+            }
+        }
         clock clock_160t 160t{
             tag @a[tag=used_freeze_trap] remove used_freeze_trap
         }
@@ -265,6 +278,9 @@ dir private {
                     kill @s
                 }
             }
+
+            # Refill chest that contain player's weapons
+            function *private/player_preparation_room/refill_weapons_chest
         }
 
         clock clock_5t 5t {
@@ -589,6 +605,24 @@ dir private {
             summon text_display -178 278.35 -189.9 {Tags:["start_text"],text:'{"color":"black","text":"<- Start"}',background:16711680}
         }
     }
+    dir player_preparation_room{
+        function create_text{
+            summon text_display -193.9 278.35 -189.9 {Tags:["player_room_text"],text:'{"color":"black","text":"<- Go to the Forest"}',background:16711680}
+        }
+        function refill_weapons_chest{
+            # data merge block -196 277 -180 {Items:[{Slot:0b,id:"minecraft:iron_sword",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Super Sword"}',"minecraft:lore":['"Gives increased strength and"','"increased speed to the bearer"'],"minecraft:custom_model_data":123,"minecraft:attribute_modifiers":{modifiers:[{id:"attack_damage",type:"generic.attack_damage",amount:6,operation:"add_value"},{id:"movement_speed",type:"generic.movement_speed",amount:0.1,operation:"add_value"}],show_in_tooltip:false}}},{Slot:2b,id:"minecraft:crossbow",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Rapid-Fire Crossbow"}',"minecraft:lore":['"A special crossbow for shooting"','"arrows in a quick succession"'],"minecraft:enchantments":{levels:{"minecraft:quick_charge":100},show_in_tooltip:false}}},{Slot:4b,id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Snowball Gun"}',"minecraft:lore":['"Right-click to shoot snowball"'],"minecraft:custom_model_data":100052,"minecraft:custom_data":{tool:"snowball_gun"}}},{Slot:6b,id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Laser Gun"}',"minecraft:lore":['"Right-click to shoot laser beam"'],"minecraft:custom_model_data":100051,"minecraft:custom_data":{tool:"laser_gun"}}},{Slot:8b,id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Grenade Launcher"}',"minecraft:lore":['"Right-click to shoot grenade"'],"minecraft:custom_model_data":100053,"minecraft:custom_data":{tool:"grenade_launcher"}}},{Slot:11b,id:"minecraft:arrow",count:99,components:{"minecraft:max_stack_size":99}}]}
+            data merge block -196 277 -180 {Items:[ \
+                {Slot:0b,id:"minecraft:iron_sword",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Super Sword"}',"minecraft:lore":['"Gives increased strength and"','"increased speed to the bearer"'],"minecraft:custom_model_data":123,"minecraft:attribute_modifiers":{modifiers:[{id:"attack_damage",type:"generic.attack_damage",amount:6,operation:"add_value"},{id:"movement_speed",type:"generic.movement_speed",amount:0.1,operation:"add_value"}],show_in_tooltip:false}}}, \
+                {Slot:2b,id:"minecraft:crossbow",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Rapid-Fire Crossbow"}',"minecraft:lore":['"A special crossbow for shooting"','"arrows in a quick succession"'],"minecraft:enchantments":{levels:{"minecraft:quick_charge":100},show_in_tooltip:false}}}, \
+                {Slot:4b,id:"minecraft:snowball",count:99,components:{"minecraft:max_stack_size":99,"minecraft:enchantments":{levels:{"minecraft:protection":1},show_in_tooltip:false}}}, \
+                {Slot:13b,id:"minecraft:snowball",count:99,components:{"minecraft:max_stack_size":99,"minecraft:enchantments":{levels:{"minecraft:protection":1},show_in_tooltip:false}}}, \
+                {Slot:22b,id:"minecraft:snowball",count:99,components:{"minecraft:max_stack_size":99,"minecraft:enchantments":{levels:{"minecraft:protection":1},show_in_tooltip:false}}}, \
+                {Slot:6b,id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Laser Gun"}',"minecraft:lore":['"Right-click to shoot laser beam"'],"minecraft:custom_model_data":100051,"minecraft:custom_data":{tool:"laser_gun"}}}, \
+                {Slot:8b,id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Grenade Launcher"}',"minecraft:lore":['"Right-click to shoot grenade"'],"minecraft:custom_model_data":100053,"minecraft:custom_data":{tool:"grenade_launcher"}}}, \
+                {Slot:11b,id:"minecraft:arrow",count:99,components:{"minecraft:max_stack_size":99}} \
+            ]}
+        }
+    }
     function run_on_first_tick{
         #! This will only run as a player and on their first tick
         # /advancement revoke Mizab only scary_troller:run_on_first_tick
@@ -652,6 +686,14 @@ dir private {
                         }
                     }
                 }
+            }
+        }
+        function glow_chests{
+            execute as @e[type=armor_stand,tag=chest_marker] at @s unless entity @a[distance=..20] run{
+                summon shulker ~ ~ ~ {Glowing:1b,DeathLootTable:"empty",AttachFace:0b,Tags:["glowing_outline"],NoAI:1b}
+            }
+            schedule 3s replace {
+                execute as @e[type=armor_stand,tag=chest_marker] at @s run tp @e[type=shulker,tag=glowing_outline] ~ ~-600 ~
             }
         }
     }

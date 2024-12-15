@@ -1,10 +1,5 @@
 # Generated with MC-Build
 
-# Store the count of the key(s)
-execute store result score @s key_count run clear @s carrot_on_a_stick[custom_model_data=111003] 0
-execute if score @s key_count matches 1 run title @s actionbar {"text":"\uE000"}
-execute if score @s key_count matches 2 run title @s actionbar {"text":"\uE000\uE000"}
-execute if score @s key_count matches 3 run title @s actionbar {"text":"\uE000\uE000\uE000"}
-execute if score @s key_count matches 4 run title @s actionbar {"text":"\uE000\uE000\uE000\uE000"}
-execute if score @s key_count matches 5.. run title @s actionbar {"text":"\uE000\uE000\uE000\uE000\uE000"}
-execute if score @s key_count matches 6.. run title @s actionbar {"text":"\uE000\uE000\uE000\uE000\uE000\uE000"}
+summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["new","herobrine_trap", "scary_generated"], ArmorItems:[{},{},{},{id:"minecraft:wooden_hoe",count:1,components:{"minecraft:item_model":"herobrine_trap"}}]}
+execute as @e[type=armor_stand, tag=herobrine_trap, tag=new, distance=..3] at @s run function scary_troller:private/clocks/zzz/29
+kill @s

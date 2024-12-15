@@ -1,5 +1,5 @@
 # Generated with MC-Build
 
-scoreboard players set #ifelse mcb.internal 1
-tellraw @a[tag=troller] {"text":"[Water Trap] Trap can't be set up because it's not in a water body", "color":"red"}
-kill @s
+scoreboard players set #ifelse mcb.internal 0
+execute if block ~ ~ ~ water run function scary_troller:private/clocks/zzz/26
+execute if score #ifelse mcb.internal matches 0 run function scary_troller:private/clocks/zzz/27

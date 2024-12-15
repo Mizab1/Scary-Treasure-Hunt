@@ -1,5 +1,4 @@
 # Generated with MC-Build
 
-scoreboard players remove @s item_select 1
-playsound minecraft:block.stone_button.click_off master @s ~ ~ ~ 1 1
-function scary_troller:private/cycle_items/cycle_item_check
+execute if score @s item_select matches ..20 run function scary_troller:private/zzz/31
+execute if score @s item_select matches 21 run function scary_troller:private/zzz/32

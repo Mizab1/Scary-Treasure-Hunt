@@ -1,4 +1,4 @@
 # Generated with MC-Build
 
-fill ~3 ~3 ~3 ~-3 ~-3 ~-3 fire replace air
+summon creeper ~ ~ ~ {Fuse:0, Tags:["scary_generated"]}
 kill @s

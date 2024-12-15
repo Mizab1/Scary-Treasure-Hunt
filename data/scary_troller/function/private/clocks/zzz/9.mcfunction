@@ -1,4 +1,11 @@
 # Generated with MC-Build
 
-particle dust{color:[1.000,0.000,0.000],scale:1} ~ ~ ~ .1 .1 .1 1 2 normal
-execute if entity @a[tag=!troller, distance=..3] run function scary_troller:private/clocks/zzz/10
+summon evoker_fangs ~-1 ~ ~-1
+summon evoker_fangs ~-1 ~ ~0
+summon evoker_fangs ~-1 ~ ~1
+summon evoker_fangs ~0 ~ ~-1
+summon evoker_fangs ~0 ~ ~0
+summon evoker_fangs ~0 ~ ~1
+summon evoker_fangs ~1 ~ ~-1
+summon evoker_fangs ~1 ~ ~0
+summon evoker_fangs ~1 ~ ~1

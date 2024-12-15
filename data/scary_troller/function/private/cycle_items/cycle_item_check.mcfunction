@@ -19,3 +19,7 @@ execute as @a[tag=troller] at @s if score @s item_select matches 14 run function
 execute as @a[tag=troller] at @s if score @s item_select matches 15 run function scary_troller:private/cycle_items/zzz/15
 execute as @a[tag=troller] at @s if score @s item_select matches 16 run function scary_troller:private/cycle_items/zzz/16
 execute as @a[tag=troller] at @s if score @s item_select matches 17 run function scary_troller:private/cycle_items/zzz/17
+execute as @a[tag=troller] at @s if score @s item_select matches 18 run function scary_troller:private/cycle_items/zzz/18
+execute as @a[tag=troller] at @s if score @s item_select matches 19 run function scary_troller:private/cycle_items/zzz/19
+execute as @a[tag=troller] at @s if score @s item_select matches 20 run function scary_troller:private/cycle_items/zzz/20
+execute as @a[tag=troller] at @s if score @s item_select matches 21 run function scary_troller:private/cycle_items/zzz/21

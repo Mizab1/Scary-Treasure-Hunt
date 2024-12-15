@@ -1,5 +1,3 @@
 # Generated with MC-Build
 
-scoreboard players remove @s item_select 1
-playsound minecraft:block.stone_button.click_off master @s ~ ~ ~ 1 1
-function scary_troller:private/cycle_items/cycle_item_check
+damage @a[dx=0,tag=!troller,limit=1] 1 minecraft:player_attack

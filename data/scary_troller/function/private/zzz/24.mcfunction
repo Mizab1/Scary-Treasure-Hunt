@@ -1,3 +1,3 @@
 # Generated with MC-Build
 
-damage @a[dx=0,tag=!troller,limit=1] 1 minecraft:player_attack
+execute as @e[type=snowball,tag=custom_snowball,tag=!processed] at @s run function scary_troller:private/zzz/23

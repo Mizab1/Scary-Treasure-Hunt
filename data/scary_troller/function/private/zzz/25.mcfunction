@@ -1,4 +1,4 @@
 # Generated with MC-Build
 
-playsound minecraft:entity.dragon_fireball.explode master @a ~ ~ ~ 0.5 1.5
-summon tnt ^ ^1.5 ^ {Tags:["custom_grenade"],fuse:60}
+playsound minecraft:block.beacon.deactivate master @a ~ ~ ~ 2 1.5
+execute as @s at @s anchored eyes positioned ^ ^ ^1 if block ~ ~ ~ #minecraft:air run function scary_troller:private/zzz/26

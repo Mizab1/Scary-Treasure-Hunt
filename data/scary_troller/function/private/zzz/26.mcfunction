@@ -1,16 +1,6 @@
 # Generated with MC-Build
 
-execute store result score @s pos_x1 run data get entity @s Pos[0] 1000
-execute store result score @s pos_y1 run data get entity @s Pos[1] 1000
-execute store result score @s pos_z1 run data get entity @s Pos[2] 1000
-tp @s ^ ^ ^0.05
-execute store result score @s pos_x2 run data get entity @s Pos[0] 1000
-execute store result score @s pos_y2 run data get entity @s Pos[1] 1000
-execute store result score @s pos_z2 run data get entity @s Pos[2] 1000
-scoreboard players operation @s pos_x2 -= @s pos_x1
-scoreboard players operation @s pos_y2 -= @s pos_y1
-scoreboard players operation @s pos_z2 -= @s pos_z1
-execute store result entity @s Motion[0] double 0.03 run scoreboard players get @s pos_x2
-execute store result entity @s Motion[1] double 0.03 run scoreboard players get @s pos_y2
-execute store result entity @s Motion[2] double 0.03 run scoreboard players get @s pos_z2
-tag @s add processed
+execute if block ~ ~ ~ #minecraft:air positioned ^ ^ ^1 run function scary_troller:private/zzz/26
+particle dust{color:[1.000,0.000,0.000],scale:1} ^-0.8 ^-0.6 ^1.2 0.2 0.2 0.2 1 20 normal
+execute unless block ~ ~ ~ #minecraft:air run function scary_troller:private/zzz/27
+execute if entity @a[dx=0,tag=!troller] run function scary_troller:private/zzz/28

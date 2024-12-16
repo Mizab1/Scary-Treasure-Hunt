@@ -3,7 +3,7 @@
     {
       "type": "bitmap",
       "file": "minecraft:font/key.png",
-      "ascent": 10,
+      "ascent": 25,
       "height": 25,
       "chars": [
           "\uE000"

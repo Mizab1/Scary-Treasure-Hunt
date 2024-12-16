@@ -349,6 +349,9 @@ dir private {
 
             # Check for player presence near the teleport marker
             execute as @e[type=marker,tag=teleport_marker] at @s if entity @a[distance=..2] run{
+                execute as @a[tag=troller] at @s run function scary_troller:remove_troller
+                scoreboard players set start game 0
+
                 tp @a -158 277 -184 -180 0
                 execute as @a at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 1
 
@@ -635,8 +638,8 @@ dir private {
         # /advancement revoke Mizab only scary_troller:run_on_first_tick
         # The above command is used to revoke this advancement
 
-        spawnpoint @s -179 277 -184
-        tp @s -179 277 -184 120 0
+        spawnpoint @s -179 277 -185
+        tp @s -179 277 -185 180 0
     }
     dir treasure_chest{
         function spawn_chest_marker{
@@ -704,6 +707,32 @@ dir private {
             }
         }
     }
+    dir command_blocks{
+        function start_room_command{
+            tp @a -196 277 -185 0 0
+            tellraw @a {"text":"Players, pick few weapons of your choice from the chest", "color":"yellow"}
+        }
+        function player_preparation_room_command{
+            tellraw @a {"text":"You are going to get teleported into the dark forest, are you ready?", "color":"yellow"}
+
+            function ../treasure_chest/place_chests
+            function ../treasure_chest/spawn_loot_randomly
+            function ../door/place_door_structure
+
+            schedule 30t replace {
+                tp @a -149 94 -173 140 0
+                spawnpoint @a -149 94 -173
+                gamemode adventure @a
+                scoreboard players set start game 1
+
+                tellraw @a {"text":"You are trapped in a dark, creepy forest. To escape, find six hidden keys that unlock the door to freedom. But watch out—the sinister Troller is lurking, setting traps to scare and kill you. Good luck... you’ll need it.", "color":"yellow"}
+            }
+        }
+        function celebration_room_command{
+            # When they click restart
+            tp @a -179 277 -185 180 0
+        }
+    }
 }
 
 function make_me_troller{
@@ -720,40 +749,40 @@ function remove_troller{
     clear @s
     kill @e[type= mutantmonsters:mutant_enderman,tag=troller_entity]
 }
-function give_non_troll_weapons{
-    give @s iron_sword[custom_name='{"italic":false,"text":"Super Sword"}',lore=['"Gives increased strength and"','"increased speed to the bearer"'],attribute_modifiers={modifiers:[{id:"attack_damage",type:"generic.attack_damage",amount:6,operation:"add_value"},{id:"movement_speed",type:"generic.movement_speed",amount:0.1,operation:"add_value"}],show_in_tooltip:false}] 1
-    give @s crossbow[custom_name='{"italic":false,"text":"Rapid-fire Crossbow"}',lore=['"A special crossbow for shooting"','"arrows in a quick succession"'],enchantments={levels:{"minecraft:quick_charge":100},show_in_tooltip:false}] 1
-    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Laser Gun"}',lore=['"Right-click to shoot laser beam"'],custom_data={tool:"laser_gun"},custom_model_data=100051] 1
-    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Snowball Gun"}',lore=['"Right-click to shoot snowball"'],custom_data={tool:"snowball_gun"},custom_model_data=100052] 1
-    give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Grenade Launcher"}',lore=['"Right-click to shoot grenade"'],custom_data={tool:"grenade_launcher"},custom_model_data=100053] 1
-    give @s arrow 64
-}
+# function give_non_troll_weapons{
+#     give @s iron_sword[custom_name='{"italic":false,"text":"Super Sword"}',lore=['"Gives increased strength and"','"increased speed to the bearer"'],attribute_modifiers={modifiers:[{id:"attack_damage",type:"generic.attack_damage",amount:6,operation:"add_value"},{id:"movement_speed",type:"generic.movement_speed",amount:0.1,operation:"add_value"}],show_in_tooltip:false}] 1
+#     give @s crossbow[custom_name='{"italic":false,"text":"Rapid-fire Crossbow"}',lore=['"A special crossbow for shooting"','"arrows in a quick succession"'],enchantments={levels:{"minecraft:quick_charge":100},show_in_tooltip:false}] 1
+#     give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Laser Gun"}',lore=['"Right-click to shoot laser beam"'],custom_data={tool:"laser_gun"},custom_model_data=100051] 1
+#     give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Snowball Gun"}',lore=['"Right-click to shoot snowball"'],custom_data={tool:"snowball_gun"},custom_model_data=100052] 1
+#     give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Grenade Launcher"}',lore=['"Right-click to shoot grenade"'],custom_data={tool:"grenade_launcher"},custom_model_data=100053] 1
+#     give @s arrow 64
+# }
 function give_key{
     give @s carrot_on_a_stick[custom_name='{"italic":false,"text":"Key"}',custom_data={tool:"key"},custom_model_data=111003]
 }
-function spawn_test_mobs{
-    <%%
-        let mobs_object = {
-            "Ghost":"zombie",
-            "Monster":"husk",
-            "Scary Creeper":"creeper",
-            "Siren Head":"enderman",
-            "Worm":"spider",
-            "Infected Spider":"cave_spider",
-            "Slime":"slime",
-            "Panda":"panda",
-            "Zoglin":"zoglin",
-            "Goat":"goat",
-            "Cow":"cow",
-        };
-        let distance = 0;
+# function spawn_test_mobs{
+#     <%%
+#         let mobs_object = {
+#             "Ghost":"zombie",
+#             "Monster":"husk",
+#             "Scary Creeper":"creeper",
+#             "Siren Head":"enderman",
+#             "Worm":"spider",
+#             "Infected Spider":"cave_spider",
+#             "Slime":"slime",
+#             "Panda":"panda",
+#             "Zoglin":"zoglin",
+#             "Goat":"goat",
+#             "Cow":"cow",
+#         };
+#         let distance = 0;
 
-        for (let [key, value] of Object.entries(mobs_object)) {
-            emit(`summon ${value} ~${distance * 3} ~ ~ {CustomName:'\"${key}\"',NoAI:1b,Tags:["test"],DeathLootTable:"empty",ArmorItems:[{},{},{},{id:"minecraft:chainmail_helmet",count:1}],ArmorDropChances:[0.085F,0.085F,0.085F,0.000F]}`)
-            distance++
-        }
-    %%>
-}
+#         for (let [key, value] of Object.entries(mobs_object)) {
+#             emit(`summon ${value} ~${distance * 3} ~ ~ {CustomName:'\"${key}\"',NoAI:1b,Tags:["test"],DeathLootTable:"empty",ArmorItems:[{},{},{},{id:"minecraft:chainmail_helmet",count:1}],ArmorDropChances:[0.085F,0.085F,0.085F,0.000F]}`)
+#             distance++
+#         }
+#     %%>
+# }
 
 #! JSONs
 tag blocks scary_blocks replace {

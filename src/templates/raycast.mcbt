@@ -23,7 +23,7 @@ template raycast {
         execute as <%exec_entity%> at @s anchored eyes positioned ^ ^ ^1 if block ~ ~ ~ <%block_to_ignore%> run{
             execute if block ~ ~ ~ <%block_to_ignore%> positioned ^ ^ ^1 run function ^0
 
-            particle dust{color:[1.000,0.976,0.965],scale:1} ^-0.8 ^-0.6 ^1.2 0.2 0.2 0.2 1 20 normal
+            particle dust{color:[1.000,0.976,0.965],scale:1} ^-0.4 ^-0.2 ^0.2 0.2 0.2 0.2 1 20 normal
             playsound minecraft:entity.shulker.shoot ambient @a ~ ~ ~ 1 0.5
 
             <%%
@@ -36,7 +36,7 @@ template raycast {
         execute as <%exec_entity%> at @s anchored eyes positioned ^ ^ ^1 if block ~ ~ ~ <%block_to_ignore%> run{
             execute if block ~ ~ ~ <%block_to_ignore%> positioned ^ ^ ^1 run function ^0
 
-            particle dust{color:[0.039,0.039,0.039],scale:1} ^-0.8 ^-0.6 ^1.2 0.2 0.2 0.2 1 20 normal
+            particle dust{color:[0.039,0.039,0.039],scale:1} ^-0.4 ^-0.2 ^0.2 0.2 0.2 0.2 1 20 normal
             playsound minecraft:entity.shulker.shoot ambient @a ~ ~ ~ 1 0.5
 
             <%%
@@ -46,7 +46,7 @@ template raycast {
         }
     }
     with laser exec_entity:word block_to_ignore:word target_entity:word success:block{
-        execute as <%exec_entity%> at @s anchored eyes positioned ^ ^ ^1 if block ~ ~ ~ <%block_to_ignore%> run{
+        execute as <%exec_entity%> at @s anchored eyes positioned ^ ^ ^1.5 if block ~ ~ ~ <%block_to_ignore%> run{
             execute if block ~ ~ ~ <%block_to_ignore%> positioned ^ ^ ^1 run function ^0
 
             particle dust{color:[1.000,0.000,0.000],scale:1} ^-0.8 ^-0.6 ^1.2 0.2 0.2 0.2 1 20 normal

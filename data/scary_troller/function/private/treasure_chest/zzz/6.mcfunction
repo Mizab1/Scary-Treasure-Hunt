@@ -1,5 +1,3 @@
 # Generated with MC-Build
 
-execute if score chest_draw_lots private matches 1 run function scary_troller:private/treasure_chest/zzz/7
-execute if score chest_draw_lots private matches 2 run function scary_troller:private/treasure_chest/zzz/8
-execute if score chest_draw_lots private matches 3 run function scary_troller:private/treasure_chest/zzz/9
+execute as @s[tag=sub_chest1] run data merge block ~ ~ ~ {LootTable:"scary_troller:treasure_loot"}

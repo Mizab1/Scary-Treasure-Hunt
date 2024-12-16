@@ -1,3 +1,3 @@
 # Generated with MC-Build
 
-execute as @e[type=armor_stand,tag=chest_marker] at @s run tp @e[type=shulker,tag=glowing_outline] ~ ~-600 ~
+execute as @s[tag=sub_chest2] run data merge block ~ ~ ~ {LootTable:"scary_troller:treasure_loot"}

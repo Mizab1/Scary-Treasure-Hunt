@@ -71,7 +71,7 @@ dir private {
                     global["freeze_player_trap_duration"] = 4
                 %%>
                 execute as @a[tag=!troller, distance=..<%global["freeze_player_trap_reach"]%>] at @s run{
-                    summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["cage","scary_generated"],ArmorItems:[{},{},{},{id:"minecraft:wooden_hoe",count:1,components:{"minecraft:item_model":"cage"}}]}
+                    summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["cage","scary_generated"],ArmorItems:[{},{},{},{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_model_data":100013}}]}
                     effect give @s minecraft:slowness <%global["freeze_player_trap_duration"]%> 100 true
                     schedule <%global["freeze_player_trap_duration"]%>s replace {
                         kill @e[type=armor_stand,tag=cage]
@@ -199,6 +199,12 @@ dir private {
         execute if score key_inserted private matches 6.. run{
             function ./door/open_door
         }
+
+        # Kill the mutant enderman particle
+        kill @e[type=mutantmonsters:endersoul_fragment]
+        kill @e[type=mutantmonsters:endersoul_clone]
+        kill @e[type=item,nbt={Item:{id:"minecraft:ender_eye"}}]
+        kill @e[type=item,nbt={Item:{id:"minecraft:ender_pearl"}}]
     } 
 
     #! Clocks
@@ -257,8 +263,8 @@ dir private {
             execute as @e[type=marker, tag=guardian_trap_marker] at @s run{
                 particle dust{color:[0.000,1.000,0.000],scale:1} ~ ~ ~ .1 .1 .1 1 2 normal
                 execute if entity @a[tag=!troller, distance=..3] run{
-                    particle minecraft:elder_guardian ~ ~ ~ 0 0 0 1 1 normal @a[distance=..3]
-                    playsound minecraft:entity.elder_guardian.curse master @a ~ ~ ~ 2 0.3
+                    particle minecraft:elder_guardian ~ ~ ~ 0 0 0 1 1 normal @a[tag=!troller,distance=..3]
+                    playsound minecraft:entity.elder_guardian.curse master @a[tag=!troller,distance=..3] ~ ~ ~ 2 0.3
                     kill @s
                 }
             }
@@ -266,7 +272,7 @@ dir private {
             # Landmine trap logic
             execute as @e[type=armor_stand, tag=landmine] at @s run{
                 execute if entity @a[tag=!troller, distance=..2] run{
-                    summon creeper ~ ~ ~ {Fuse:0, Tags:["scary_generated"]}
+                    summon creeper ~ ~ ~ {Fuse:0,Tags:["scary_generated"],CustomName:'"Landmine"'}
                     kill @s
                 }
             }
@@ -305,7 +311,7 @@ dir private {
 
             # Setup the landmine
             execute as @e[type=endermite, tag=landmine_spawner_marker] at @s run{
-                summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["landmine", "scary_generated"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",count:1,components:{"minecraft:item_model":"landmine_trap"}}]}
+                summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["landmine","scary_generated"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",count:1,components:{"minecraft:custom_model_data":100004}}]}
                 kill @s
             }
 
@@ -329,9 +335,10 @@ dir private {
 
             # Setup the herobrine trap
             execute as @e[type=endermite, tag=herobrine_spawner_marker] at @s run{
-                summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["new","herobrine_trap", "scary_generated"], ArmorItems:[{},{},{},{id:"minecraft:wooden_hoe",count:1,components:{"minecraft:item_model":"herobrine_trap"}}]}
+                summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["new","herobrine_trap", "scary_generated"], ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",count:1,components:{"minecraft:custom_model_data":100014}}]}
                 execute as @e[type=armor_stand, tag=herobrine_trap, tag=new, distance=..3] at @s run{
                     # rotate @s facing entity @p[tag=troller]
+                    tp @s ~ ~ ~ facing entity @p[tag=troller]
                     tag @s remove new
                 }
                 kill @s
@@ -351,6 +358,7 @@ dir private {
             execute as @e[type=marker,tag=teleport_marker] at @s if entity @a[distance=..2] run{
                 execute as @a[tag=troller] at @s run function scary_troller:remove_troller
                 scoreboard players set start game 0
+                clear @a
 
                 tp @a -158 277 -184 -180 0
                 execute as @a at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 1
@@ -412,7 +420,7 @@ dir private {
 
             `carrot_on_a_stick[custom_name='{"italic":false,"text":"Blindness Wand"}',lore=['"Right-click to blind the player you are aiming at"'],custom_data={tool:"blindness_wand"},custom_model_data=100016]`,
 
-            `zombie_spawn_egg[custom_name='{"italic":false,"text":"Spawn Ghost"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:zombie",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","ghost"],CustomName:'"Ghost"'}]`,
+            `zombie_spawn_egg[custom_name='{"italic":false,"text":"Spawn Ghost"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:zombie",ArmorItems:[{},{},{},{id:"minecraft:chainmail_helmet",count:1}],ArmorDropChances:[0.085F,0.085F,0.085F,0.000F],DeathLootTable:"empty",Tags:["scary_mob","scary_generated","ghost"],CustomName:'"Ghost"'}]`,
 
             `husk_spawn_egg[custom_name='{"italic":false,"text":"Spawn Monster"}',enchantments={levels:{"minecraft:protection":1},show_in_tooltip:false},entity_data={id:"minecraft:husk",DeathLootTable:"empty",Tags:["scary_mob","scary_generated","monster"],CustomName:'"Monster"'}]`,
 
@@ -619,7 +627,10 @@ dir private {
                 {Slot:4b,id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Snowball Gun"}',"minecraft:lore":['"Right-click to shoot snowball"'],"minecraft:custom_model_data":100052,"minecraft:custom_data":{tool:"snowball_gun"}}}, \
                 {Slot:6b,id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Laser Gun"}',"minecraft:lore":['"Right-click to shoot laser beam"'],"minecraft:custom_model_data":100051,"minecraft:custom_data":{tool:"laser_gun"}}}, \
                 {Slot:8b,id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Grenade Launcher"}',"minecraft:lore":['"Right-click to shoot grenade"'],"minecraft:custom_model_data":100053,"minecraft:custom_data":{tool:"grenade_launcher"}}}, \
-                {Slot:11b,id:"minecraft:arrow",count:99,components:{"minecraft:max_stack_size":99}} \
+                {Slot:11b,id:"minecraft:arrow",count:99,components:{"minecraft:max_stack_size":99}}, \
+                {Slot:21b,id:"minecraft:cooked_beef",count:99,components:{"minecraft:max_stack_size":99}}, \
+                {Slot:22b,id:"minecraft:cooked_beef",count:99,components:{"minecraft:max_stack_size":99}}, \
+                {Slot:23b,id:"minecraft:cooked_beef",count:99,components:{"minecraft:max_stack_size":99}} \
             ]}
             # data merge block -196 277 -180 {Items:[ \
             #     {Slot:0b,id:"minecraft:iron_sword",count:1,components:{"minecraft:custom_name":'{"italic":false,"text":"Super Sword"}',"minecraft:lore":['"Gives increased strength and"','"increased speed to the bearer"'],"minecraft:custom_model_data":123,"minecraft:attribute_modifiers":{modifiers:[{id:"attack_damage",type:"generic.attack_damage",amount:6,operation:"add_value"},{id:"movement_speed",type:"generic.movement_speed",amount:0.1,operation:"add_value"}],show_in_tooltip:false}}}, \
@@ -642,43 +653,46 @@ dir private {
         tp @s -179 277 -185 180 0
     }
     dir treasure_chest{
+        function destroy_chests{
+            execute at @e[type=armor_stand,tag=chest_marker] run{
+                loot replace block ~ ~ ~ container.0 27 loot minecraft:empty
+                setblock ~ ~ ~ air
+            }
+            kill @e[type=armor_stand,tag=chest_marker]
+        }
         function spawn_chest_marker{
             <%%
                 let chest_coords = [
-                    "-137 96 -154",
-                    "33 104 -53",
-                    "-67 92 51",
-                    "-152 99 59",
-                    "-217 113 -11",
-                    "-258 80 -131",
-                    "-317 95 -268",
-                    "-157 133 -317",
-                    "-22 127 -329",
-                    "64 94 -264",
-                    "12 90 -189",
-                    "-53 113 -97",
-                    "-63 96 -30",
-                    "-182 68 -102",
-                    "-193 95 -210",
-                    "-263 76 -96",
-                    "-201 114 -25",
-                    "-62 107 -126"
+                    "-132 96 -181",
+                    "-82 95 -131",
+                    "-96 96 -105",
+                    "-175 71 -117",
+                    "-200 103 -279",
+                    "-245 102 -287",
+                    "-227 88 -218",
+                    "-246 88 -159",
+                    "-199 68 -106",
+                    "-145 99 -114",
+                    "-126 96 -183",
+                    "-150 104 -212",
+                    "-169 112 -286",
+                    "-93 134 -288",
+                    "-134 97 -188",
+                    "-210 85 -197",
+                    "-242 89 -228",
+                    "-120 121 -78"
                 ]
 
                 chest_coords.forEach((i, idx) => {
-                    let chest = Math.floor(idx / 3) + 1;
-                    let sub_chest = idx % 3 + 1;   
+                    let chest = Math.floor(idx / 2) + 1;
+                    let sub_chest = idx % 2 + 1;   
                     emit.mcb(`execute positioned ${i} run summon armor_stand ~ ~ ~ {Invisible:1b, Tags:["chest_marker","chest${chest}","sub_chest${sub_chest}"]}`)
                 })
             %%>
         }
         function place_chests{
             # Kill the chest marker
-            execute at @e[type=armor_stand,tag=chest_marker] run{
-                loot replace block ~ ~ ~ container.0 27 loot minecraft:empty
-                setblock ~ ~ ~ air
-            }
-            kill @e[type=armor_stand,tag=chest_marker]
+            function ./destroy_chests
 
             function ./spawn_chest_marker
             execute as @e[type=armor_stand,tag=chest_marker] at @s run {
@@ -687,10 +701,10 @@ dir private {
 
         }
         function spawn_loot_randomly{
-            REPEAT (1, 6) as i {
-                execute store result score chest_draw_lots private run random value 1..3
+            REPEAT (1, 9) as i {
+                execute store result score chest_draw_lots private run random value 1..2
                 execute as @e[type=armor_stand,tag=chest<%i%>] at @s run{
-                    REPEAT(1, 3) as j{
+                    REPEAT(1, 2) as j{
                         execute if score chest_draw_lots private matches <%j%> run{
                             execute as @s[tag=sub_chest<%j%>] run data merge block ~ ~ ~ {LootTable:"<%context.namespace%>:treasure_loot"}
                         }
@@ -713,20 +727,18 @@ dir private {
             tellraw @a {"text":"Players, pick few weapons of your choice from the chest", "color":"yellow"}
         }
         function player_preparation_room_command{
-            tellraw @a {"text":"You are going to get teleported into the dark forest, are you ready?", "color":"yellow"}
+            # tellraw @a {"text":"You are going to get teleported into the dark forest, are you ready?", "color":"yellow"}
+
+            tp @a -149 94 -173 140 0
+            spawnpoint @a -149 94 -173
+            gamemode adventure @a
+            scoreboard players set start game 1
+
+            tellraw @a {"text":"You are stuck in a dark, creepy forest. To escape, find six hidden keys to unlock the door to freedom. Look for chests around the map—they might have a key inside. But be careful—the scary Troller is watching and setting traps to catch you. Good luck... you’ll need it.", "color":"yellow"}
 
             function ../treasure_chest/place_chests
             function ../treasure_chest/spawn_loot_randomly
             function ../door/place_door_structure
-
-            schedule 30t replace {
-                tp @a -149 94 -173 140 0
-                spawnpoint @a -149 94 -173
-                gamemode adventure @a
-                scoreboard players set start game 1
-
-                tellraw @a {"text":"You are trapped in a dark, creepy forest. To escape, find six hidden keys that unlock the door to freedom. But watch out—the sinister Troller is lurking, setting traps to scare and kill you. Good luck... you’ll need it.", "color":"yellow"}
-            }
         }
         function celebration_room_command{
             # When they click restart
@@ -736,6 +748,7 @@ dir private {
 }
 
 function make_me_troller{
+    gamemode creative @s
     tag @s add troller
     function *private/cycle_items/give_items
     team join troller @s

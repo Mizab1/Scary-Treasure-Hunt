@@ -7,3 +7,8 @@ execute as @a[tag=troller] at @s unless entity @e[type=mutantmonsters:mutant_end
 execute as @e[type=mutantmonsters:mutant_enderman,tag=troller_entity] at @s unless entity @a[distance=..4] run kill @s
 # Check score and open the door
 execute if score key_inserted private matches 6.. run function scary_troller:private/zzz/37
+# Kill the mutant enderman particle
+kill @e[type=mutantmonsters:endersoul_fragment]
+kill @e[type=mutantmonsters:endersoul_clone]
+kill @e[type=item,nbt={Item:{id:"minecraft:ender_eye"}}]
+kill @e[type=item,nbt={Item:{id:"minecraft:ender_pearl"}}]

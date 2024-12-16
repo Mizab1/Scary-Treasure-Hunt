@@ -2,6 +2,7 @@
 
 execute as @a[tag=troller] at @s run function scary_troller:remove_troller
 scoreboard players set start game 0
+clear @a
 tp @a -158 277 -184 -180 0
 execute as @a at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 1
 # Fireworks

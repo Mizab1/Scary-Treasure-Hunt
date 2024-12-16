@@ -5,3 +5,23 @@ Important:
   ✔ "troller" is the tag for the troller
 
 - Cerebration room is also present, make sure you don't delete it accidentally
+
+Fixed:
+  ✔ Replace button base with any block other than sea lantern
+  ✔ Disable commandBlockOutput rule
+  ✔ Position the laser ray a bit far
+  ✔ Remove the delay in player preparation room (Test)
+  ✔ Add food or saturation
+  ✔ Explain that there are 20 chests and only 6 chests contains key
+  ✔ Clear the inventory after completion
+  ✔ Make the troller go in creative
+  ✔ Kill the mutant enderman particle
+  ✔ Don't show guardian particle to troller
+  ✔ Fix the blood worm silverfish
+  ✔ Fix landmine model
+  ✔ Change the creeper name in landmine
+  ✔ Update the cage model
+  ✔ Update the herobrine model
+  ✔ Update the rotation of herobrine statue
+  ✔ Update the position of particles of the wand
+  ✔ Equip the mobs with chainmail helmet

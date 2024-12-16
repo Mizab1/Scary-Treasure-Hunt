@@ -1,3 +1,4 @@
 # Generated with MC-Build
 
-summon shulker ~ ~ ~ {Glowing:1b,DeathLootTable:"empty",AttachFace:0b,Tags:["glowing_outline"],NoAI:1b}
+execute if score chest_draw_lots private matches 1 run function scary_troller:private/treasure_chest/zzz/27
+execute if score chest_draw_lots private matches 2 run function scary_troller:private/treasure_chest/zzz/28

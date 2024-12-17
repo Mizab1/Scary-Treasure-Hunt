@@ -21,9 +21,9 @@ data/scary_troller/function/private/zzz/17.mcfunction:d338af49af1b7179c702bd541f
 data/scary_troller/function/private/zzz/23.mcfunction:116bec43006ba6238b193bca07c87288c5fd3f67
 data/scary_troller/function/private/zzz/24.mcfunction:8a807a91a3e075b548dbeca938ed3207d4d4a77f
 data/scary_troller/function/private/zzz/21.mcfunction:6f819fe969b4cacd7b9dde757cd297594f039d93
-data/scary_troller/function/private/zzz/27.mcfunction:1048c1df28d04d8e6f186ebd228dd3bfde150e7c
-data/scary_troller/function/private/zzz/28.mcfunction:1048c1df28d04d8e6f186ebd228dd3bfde150e7c
-data/scary_troller/function/private/zzz/26.mcfunction:dcfc511745248d84843d6b10678e34c5a43467d2
+data/scary_troller/function/private/zzz/27.mcfunction:06c31f7b4992b5a5bb0016b1ea32bf47241277ab
+data/scary_troller/function/private/zzz/28.mcfunction:06c31f7b4992b5a5bb0016b1ea32bf47241277ab
+data/scary_troller/function/private/zzz/26.mcfunction:30e60068b6568fe5c6f651070e3a6e1c5f525b95
 data/scary_troller/function/private/zzz/25.mcfunction:8d3c56677cfdead81c1ba954e4a811b1d296301f
 data/scary_troller/function/private/zzz/29.mcfunction:60d85a4b85469c8a05b3698eeb20523b1bb05dc7
 data/scary_troller/function/private/zzz/30.mcfunction:cdbc1928f7342c1fbc18133bb26d54ca09869ebf

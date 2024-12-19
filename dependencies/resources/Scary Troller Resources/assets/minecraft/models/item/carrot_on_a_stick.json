@@ -15,7 +15,7 @@
       { "predicate": {"custom_model_data":100016}, "model": "item/custom/traps/blindness_wand"},
       
       { "predicate": {"custom_model_data":100051}, "model": "item/custom/player_weapons/laser_gun"},
-      { "predicate": {"custom_model_data":100052}, "model": "item/custom/player_weapons/snowball_gun"},
+      { "predicate": {"custom_model_data":100052}, "model": "item/custom/player_weapons/vacuum_gun"},
       { "predicate": {"custom_model_data":100053}, "model": "item/custom/player_weapons/grenade_launcher"},
 
       { "predicate": {"custom_model_data":111001}, "model": "item/custom/previous_arrow"},

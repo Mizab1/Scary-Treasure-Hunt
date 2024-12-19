@@ -1,5 +1,4 @@
 # Generated with MC-Build
 
-scoreboard players remove @s item_select 1
-playsound minecraft:block.stone_button.click_off master @s ~ ~ ~ 1 1
-function scary_troller:private/cycle_items/cycle_item_check
+playsound minecraft:entity.dragon_fireball.explode master @a ~ ~ ~ 0.5 1.5
+summon tnt ^ ^1.5 ^ {Tags:["custom_grenade"],fuse:60}

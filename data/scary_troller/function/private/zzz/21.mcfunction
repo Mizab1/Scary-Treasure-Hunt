@@ -1,6 +1,4 @@
 # Generated with MC-Build
 
-playsound minecraft:entity.snowball.throw master @a ~ ~ ~ 1 1.5
-summon snowball ~ ~ ~ {Tags:["custom_snowball"]}
-summon marker ^ ^ ^0.5 {Tags:["snowball_proj_marker"], Marker:1b}
-schedule function scary_troller:private/zzz/24 2t replace
+playsound minecraft:scary.custom.vacuum_suck master @a ~ ~ ~
+execute anchored eyes positioned ^ ^ ^1 if block ~ ~ ~ #minecraft:air run function scary_troller:private/zzz/22

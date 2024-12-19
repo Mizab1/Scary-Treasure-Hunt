@@ -1,4 +1,4 @@
 # Generated with MC-Build
 
-execute if score @s item_select matches 1.. run function scary_troller:private/zzz/32
-execute if score @s item_select matches 0 run function scary_troller:private/zzz/33
+damage @e[dx=0,type=!armor_stand,type=!marker,tag=!troller,limit=1] 1 minecraft:player_attack
+effect give @e[dx=0,type=!armor_stand,type=!marker,limit=1] slowness 3 3 true

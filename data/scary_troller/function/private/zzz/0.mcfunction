@@ -23,14 +23,40 @@ execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1
 # Blindness wand logic
 execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"blindness_wand"}}}}] run function scary_troller:private/zzz/17
 # Snowball gun logic
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"snowball_gun"}}}}] anchored eyes positioned ^-0.2 ^-0.2 ^1 run function scary_troller:private/zzz/21
+# execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"snowball_gun"}}}}] anchored eyes positioned ^-0.2 ^-0.2 ^1 run{
+#     playsound minecraft:entity.snowball.throw master @a ~ ~ ~ 1 1.5
+#     summon snowball ~ ~ ~ {Tags:["custom_snowball"]}
+#     summon marker ^ ^ ^0.5 {Tags:["snowball_proj_marker"], Marker:1b}
+#     schedule 2t replace {
+#         execute as @e[type=snowball,tag=custom_snowball,tag=!processed] at @s run{
+#             execute store result score @s pos_x1 run data get entity @s Pos[0] 100
+#             execute store result score @s pos_y1 run data get entity @s Pos[1] 100
+#             execute store result score @s pos_z1 run data get entity @s Pos[2] 100
+#             # tp @s ^ ^ ^0.1
+#             execute store result score @s pos_x2 run data get entity @e[type=marker,tag=snowball_proj_marker,limit=1,sort=nearest] Pos[0] 100
+#             execute store result score @s pos_y2 run data get entity @e[type=marker,tag=snowball_proj_marker,limit=1,sort=nearest] Pos[1] 100
+#             execute store result score @s pos_z2 run data get entity @e[type=marker,tag=snowball_proj_marker,limit=1,sort=nearest] Pos[2] 100
+#             scoreboard players operation @s pos_x2 -= @s pos_x1
+#             scoreboard players operation @s pos_y2 -= @s pos_y1
+#             scoreboard players operation @s pos_z2 -= @s pos_z1 
+#             execute store result entity @s Motion[0] double 0.04 run scoreboard players get @s pos_x2
+#             execute store result entity @s Motion[1] double 0.04 run scoreboard players get @s pos_y2
+#             execute store result entity @s Motion[2] double 0.04 run scoreboard players get @s pos_z2 
+#             kill @e[type=marker,tag=snowball_proj_marker,sort=nearest]
+#             tag @s add processed
+#         }
+#     }
+# }
+# Vacuum gun
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"vacuum_gun"}}}}] run function scary_troller:private/zzz/21
+# More outside of this block
 # Laser gun logic
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"laser_gun"}}}}] run function scary_troller:private/zzz/25
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"laser_gun"}}}}] run function scary_troller:private/zzz/28
 # Grenade launcher logic
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"grenade_launcher"}}}}] run function scary_troller:private/zzz/29
-execute as @e[type=tnt,tag=custom_grenade,tag=!processed] at @s rotated as @p run function scary_troller:private/zzz/30
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"grenade_launcher"}}}}] run function scary_troller:private/zzz/32
+execute as @e[type=tnt,tag=custom_grenade,tag=!processed] at @s rotated as @p run function scary_troller:private/zzz/33
 # Backward and forward button
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run function scary_troller:private/zzz/31
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"next_arrow"}}}}] run function scary_troller:private/zzz/34
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"previous_arrow"}}}}] run function scary_troller:private/zzz/34
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_data":{tool:"next_arrow"}}}}] run function scary_troller:private/zzz/37
 # Reset click
 scoreboard players reset @s rc_detect

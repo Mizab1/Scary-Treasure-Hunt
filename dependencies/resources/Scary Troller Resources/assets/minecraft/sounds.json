@@ -10,5 +10,11 @@
 	},
 	"scary.ambient.supernatural": {
 		"sounds": [{ "name": "ambient/supernatural" }]
+	},
+	"scary.custom.vacuum_suck": {
+		"sounds": [{ "name": "custom/vacuum_suck" }]
+	},
+	"scary.custom.vacuum_absorb": {
+		"sounds": [{ "name": "custom/vacuum_absorb" }]
 	}
 }

@@ -15,3 +15,5 @@ kill @e[type=item,nbt={Item:{id:"minecraft:ender_pearl"}}]
 # Vacuum gun
 execute as @e[tag=scary_mob] at @s if score @s capture_time matches 20.. run function scary_troller:private/zzz/41
 execute store result bossbar minecraft:capturing value run scoreboard players get @e[tag=shot, limit=1] capture_time
+# Grenade Launcher
+execute as @e[type=tnt, tag=custom_grenade] at @s run function scary_troller:private/zzz/42

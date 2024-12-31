@@ -1,5 +1,6 @@
 # Generated with MC-Build
 
+scoreboard players set @s fuse_time 60
 execute store result score @s pos_x1 run data get entity @s Pos[0] 1000
 execute store result score @s pos_y1 run data get entity @s Pos[1] 1000
 execute store result score @s pos_z1 run data get entity @s Pos[2] 1000
